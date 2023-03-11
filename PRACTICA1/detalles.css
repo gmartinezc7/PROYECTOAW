@@ -1,0 +1,26 @@
+h1 {
+    font-size: 80px;
+    text-align: center;
+    font-family: 'Courier New';
+    color:rgb(14, 14, 66)
+}
+
+p {
+    text-align: justify;
+    font-family: 'Verdana';
+    font-size: 20px; 
+}
+
+body {
+    margin: 15%;
+    background-color: rgb(239, 235, 215);
+}
+
+img { 
+    display: block;
+    margin:auto;
+    border:1px solid rgb(12, 12, 66);
+    width: 20%;
+    
+
+}

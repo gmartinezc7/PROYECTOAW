@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset= "utf-8"> 
+        <title>Formulario de contacto</title>
+        <link rel="stylesheet" type="text/css" href="detalles.css"/>
+    </head>
+
+    <body>
+        <h1>
+            Formulario:
+        </h1>
+        <form action="mailto:bryanedu@gmail.com" method="post" enctype= "text/plain"> 
+            Nombre:
+            <input type="text" name="nombre" value="" />
+            <br/>
+
+            Dirección de email de contacto
+            <input type="mail" id="mail" name="" />
+            <br/>
+            
+           <input type="radio" id="evaluacion" name="motivo" value="Evaluación">
+            <label for="evaluacion">Evaluación</label>
+            <br/>
+          
+            <input type="radio" id="sugerencias" name="motivo" value="Sugerencias">
+            <label for="sugerencias">Sugerencias</label>
+            <br/>
+
+            <input type="radio" id="criticas" name="motivo" value="Críticas"> 
+            <label for="criticas">Críticas</label>
+            <br/>
+            <br/>
+            Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio:
+            <br/>
+            <input name="verificar" type="checkbox" value="Verificado"/> Verificado     
+            <br/>
+
+            Consulta a tratar:
+            <input type="text" name="consulta" value="" required maxlength="150" />
+            <br/>
+          
+            <button type="submit"> Enviar formulario</button>
+
+
+        </form>
+        <footer>
+            <h4><a href='index.html'>Inicio</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='detalles.html'>Detalles</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='bocetos.html'>Bocetos</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href='planificacion.html'>Planificación</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='miembros.html'>Miembros</a></h4>
+        
+          </footer>
+    </body>
+</html> 
