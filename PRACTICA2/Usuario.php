@@ -7,7 +7,7 @@ class Usuario
 
     public const USER_ROLE = 2;
 
-    public const GESTOR_ROLE = 3;
+    public const MODERADOR_ROLE = 3;
 
     public static function login($nombreUsuario, $password)
     {
