@@ -10,15 +10,15 @@ $contenidoPrincipal=<<<EOS
     <div class="contenedor"> 
         <div class="contenido"> 
             <h2> Administrador</h2> 
-            <p> Explicación admin </p> 
+                <p> Explicación admin </p> 
         </div>
         <div class="contenido"> 
-            <h2> Director de marking </h2> 
-            <p> Explicacion director de marketing</p> 
+            <h2> Director de marketing </h2> 
+                <p> Explicacion director de marketing</p> 
         </div>
         <div class="contenido"> 
             <h2> Social Manager</h2> 
-            <p> Explicación social manager </p> 
+                <p> Explicación social manager </p> 
         </div>
     </div>
 
