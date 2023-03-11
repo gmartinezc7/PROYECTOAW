@@ -23,7 +23,7 @@ function esAdmin()
 
 function esMod()
 {
-    return estaLogado() && (array_seasrch(Usuario::MODERADOR_ROLE,$_SESSION['roles']) !== false);
+    return estaLogado() && (array_seasrch(Usuario::MODERADOR_ROLE, $_SESSION['roles']) !== false);
 }
 
 function verificaLogado($urlNoLogado)

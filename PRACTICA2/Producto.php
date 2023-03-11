@@ -80,7 +80,7 @@ class Producto
             , $conn->real_escape_string($producto->fecha)
             , $conn->real_escape_string($producto->cantidad)
         );
-        
+        // fila ID y return result = True
         return $result;
     }
    
