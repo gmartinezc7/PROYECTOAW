@@ -8,9 +8,9 @@ require_once __DIR__.'/Aplicacion.php';
 
  // Cambiar
 define('BD_HOST', 'localhost');
-define('BD_NAME', 'ejercicio3');
-define('BD_USER', 'ejercicio3');
-define('BD_PASS', 'ejercicio3');
+define('BD_NAME', 'klaer');
+define('BD_USER', 'klaer');
+define('BD_PASS', 'klaer');
 
 /**
  * Parámetros de configuración utilizados para generar las URLs y las rutas a ficheros en la aplicación

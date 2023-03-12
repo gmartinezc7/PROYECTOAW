@@ -6,7 +6,7 @@ class Producto
     
     public static function crea($id, $nombre, $precio, $descripcion, $tipo, $fecha, $cantidad)
     {
-        $producto = new Producto($id, $nombre, $precio, $descripcion, $tipo, $fecha, $cantidad);
+        $producto = new Producto($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad, $id);
         return $producto->guarda();
     }
 
@@ -19,7 +19,7 @@ class Producto
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Producto($fila['id'], $fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad']);
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
             }
             $rs->free();
         } else {
@@ -37,7 +37,7 @@ class Producto
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Producto($fila['id'], $fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad']);
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
             }
             $rs->free();
         } else {
@@ -56,7 +56,7 @@ class Producto
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Producto($fila['id'], $fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad']);
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
                 $disponibles[] = $result;
             }
             $rs->free();
@@ -71,8 +71,7 @@ class Producto
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO Productos(id,precio,nombre,descripcion,tipo,fecha,cantidad) VALUES ('%d', '%d', '%s', '%s', '%s','%d')"
-            , $conn->real_escape_string($producto->id)
+        $query=sprintf("INSERT INTO Productos(precio,nombre,descripcion,tipo,fecha,cantidad) VALUES ('%d', '%s', '%s', '%s','%s','%d')"
             , $conn->real_escape_string($producto->nombre)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
@@ -80,7 +79,13 @@ class Producto
             , $conn->real_escape_string($producto->fecha)
             , $conn->real_escape_string($producto->cantidad)
         );
-        // fila ID y return result = True
+        if ( $conn->query($query) ) {
+            $producto->id = $conn->insert_id;
+            $result = true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        
         return $result;
     }
    
@@ -88,7 +93,7 @@ class Producto
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Productos P SET id = '%d',nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d' WHERE P.id=%d"   
+        $query=sprintf("UPDATE Productos P SET nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d' WHERE P.id=%d"   
             , $conn->real_escape_string($producto->nombre)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
@@ -113,9 +118,7 @@ class Producto
         if (!$id) {
             return false;
         } 
-        /* Los roles se borran en cascada por la FK
-         * $result = self::borraRoles($usuario) !== false;
-         */
+       
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("DELETE FROM Productos P WHERE P.id = %d"
             , $id
@@ -141,7 +144,7 @@ class Producto
 
     private $stock;
 
-    private function __construct($id, $nombreProd, $precio, $descripcion, $tipo, $fecha, $stock)
+    private function __construct($nombreProd, $precio, $descripcion, $tipo, $fecha, $stock, $id)
     {
         $this->id = $id;
         $this->nombreProd = $nombreProd;
@@ -183,10 +186,10 @@ class Producto
     }
 
 
-    public function añadeStock($stock)
+    public function añadeStock($stock,$idProd)
     {
         $this->stock = $this->stock + $stock;
-        self::actualiza($this);
+        self::actualiza($idProd);
     }
 
     
@@ -195,14 +198,14 @@ class Producto
         return $this->stock > 0;
     }
 
-    public function reduceStock($stock)
+    public function reduceStock($stock, $idProd)
     {
         if ($stock <= $this->stock){
             $this->stock = $this->stock - $stock;
         } else {
             $this->stock = 0; // Mensaje de error?
         }
-        self::actualiza($this);
+        self::actualiza($idProd);
     }
 
     public function guarda()

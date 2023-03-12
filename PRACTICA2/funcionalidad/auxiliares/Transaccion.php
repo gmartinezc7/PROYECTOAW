@@ -24,7 +24,7 @@ class Transaccion
                 , $conn->real_escape_string($transaccion->fecha)
                 , $conn->real_escape_string($transaccion->cantidad)
             );
-            $obj->reduceStock($transaccion->cantidad);
+            $obj->reduceStock($transaccion->cantidad,$transaccion->idProd);
             $result = true;
 
             if ( $conn->query($query) ) {
@@ -44,28 +44,58 @@ class Transaccion
      * 
      *      TERMINAR 
      */
-    private static function actualiza($usuario)
+    private static function actualiza($transaccion)
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Transaccion T SET nombreUsuario = '%s', nombre='%s', password='%s' WHERE T.id=%d"
-            , $conn->real_escape_string($usuario->nombreUsuario)
-            , $conn->real_escape_string($usuario->password)
-            , $conn->real_escape_string($usuario->nombre)
-            , $conn->real_escape_string($usuario->apellidos)
-            , $conn->real_escape_string($usuario->direccion)
-            , $usuario->id
+        $query=sprintf("UPDATE Transaccion T SET idComprador = '%s', idVendedor='%s', admin='%s',idProd='%s',fecha='%s',cantidad='%d' WHERE T.id=%d"
+            , $conn->real_escape_string($transaccion->idComprador)
+            , $conn->real_escape_string($transaccion->idVendedor)
+            , $conn->real_escape_string($transaccion->admin)
+            , $conn->real_escape_string($transaccion->idProd)
+            , $conn->real_escape_string($transaccion->fecha)
+            , $conn->real_escape_string($transaccion->cantidad)
+            , $transaccion->idTransaccion
         );
-        if ( $conn->query($query) ) {
-            $result = self::borraRoles($usuario);
-            if ($result) {
-                $result = self::insertaRoles($usuario);
+        
+
+        return $result;
+    }
+
+    private static function borra($producto)
+    {
+        return self::borraPorId($producto->id);
+    }
+
+    private static function borraPorId($id)
+    {
+        if (!$id) {
+            return false;
+        }
+       
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT FROM Transaccion T WHERE T.id = %d"
+            , $id
+        );
+        $rs = $conn->query($query);
+
+        if ($rs) {
+            $info = $rs->fetch_assoc();
+            $obj = Producto::añadeStock($info['cantidad'],$info['idProd']);
+
+            $query = sprintf("DELETE FROM Transaccion T WHERE T.id = %d"
+            , $id
+            );
+
+            if ( ! $conn->query($query) ) {
+                error_log("Error BD ({$conn->errno}): {$conn->error}");
+                return false;
             }
-        } else {
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
+
         }
         
-        return $result;
+        
+        return true;
     }
 
 
@@ -130,5 +160,13 @@ class Transaccion
             return self::actualiza($this);
         }
         return self::inserta($this);
+    }
+
+    public function borrate()
+    {
+        if ($this->id !== null) {
+            return self::borra($this);
+        }
+        return false;
     }
 }
