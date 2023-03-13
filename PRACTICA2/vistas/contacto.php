@@ -24,4 +24,4 @@ $contenidoPrincipal=<<<EOS
 
 EOS;
 
-require 'includes/vistas/comun/layout.php';
+require 'comun/lobby.php';

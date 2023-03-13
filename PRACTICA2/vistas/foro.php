@@ -9,4 +9,5 @@ $contenidoPrincipal=<<<EOS
 	<p> Las nuevas Nike Tiburon.</p>
 EOS;
 
-require 'includes/vistas/comun/layout.php';
+
+require 'comun/lobby.php';
