@@ -21,6 +21,11 @@ function esAdmin()
     return estaLogado() && (array_search(Usuario::ADMIN_ROLE, $_SESSION['roles']) !== false);
 }
 
+function esMod()
+{
+    return estaLogado() && (array_seasrch(Usuario::MODERADOR_ROLE, $_SESSION['roles']) !== false);
+}
+
 function verificaLogado($urlNoLogado)
 {
     if (! estaLogado()) {

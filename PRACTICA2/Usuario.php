@@ -7,7 +7,7 @@ class Usuario
 
     public const USER_ROLE = 2;
 
-    public const GESTOR_ROLE = 3;
+    public const MODERADOR_ROLE = 3;
 
     public static function login($nombreUsuario, $password)
     {
@@ -131,10 +131,10 @@ class Usuario
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Usuarios U SET nombreUsuario = '%s', nombre='%s', password='%s' WHERE U.id=%d"
+        $query=sprintf("UPDATE Usuarios U SET nombreUsuario = '%s', nombre='%s', password='%s',apellidos='%s',direccion='%s' WHERE U.id=%d"
             , $conn->real_escape_string($usuario->nombreUsuario)
-            , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->nombre)
+            , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->apellidos)
             , $conn->real_escape_string($usuario->direccion)
             , $usuario->id
