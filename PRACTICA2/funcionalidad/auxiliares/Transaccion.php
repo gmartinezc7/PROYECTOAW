@@ -39,11 +39,7 @@ class Transaccion
     }
 
 
-    /**
-     * 
-     * 
-     *      TERMINAR 
-     */
+
     private static function actualiza($transaccion)
     {
         $result = false;
