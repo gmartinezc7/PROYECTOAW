@@ -9,26 +9,50 @@ $tituloPagina = 'Página de Compras';
 $inicio = true;
 
 
+//$busquedaProductos = Producto::buscaDisponibles();
+
+$codigohtml;
+
+
+$busquedaFor = buildFormProds();
 $contenidoPrincipal=<<<EOS
     <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>COMPRAR</h1>
-
-    <div id="myForm">
-        <form action="../Aplicacion.php" class="form-container">
-
-            <label id="compra" for="busqueda"><b>Búsqueda</b></label>
-            <textarea placeholder="Qué estás buscando?" name="Búsqueda" required></textarea>
-            <br>
-
-            <button id="submit" type="submit" class="btn">Send</button>
-
-            <!--aqui faltaría poner la función que va a hacer que se muestren los productos con ese nombre/id/categoría-->
-
-
-        </form>
-    </div>
-    
-
+    $busquedaFor
 EOS;
 
+
+
+function buildFormProds(){
+    $codigohtml = 'hola';
+    /*foreach($producto as $busquedaProductos){
+
+        $nombre = $producto.getNombreProd();
+        $descripcion = $producto.getDescripcion();
+        $tipo = $producto.getNombreProd();
+        $fecha = $producto.getFecha();
+        $stock = $producto.getStock();
+
+        
+       
+        $codigohtml .= <<<EOS
+        <p> Nombre: $nombre Descripcion: $descripcion </p>
+        EOS;
+        
+
+        
+
+
+    }*/
+
+    return $codigohtml;
+
+}
+
+
+
+
+
+
+require '../Producto.php';
 require 'comun/lobby.php';
