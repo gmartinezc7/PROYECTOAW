@@ -1,20 +1,17 @@
 
 
 <?php
-//require ("./comun/pie.php"); 
-/**require_once 'includes/config.php';
-require_once 'includes/vistas/helpers/autorizacion.php'; */
 
-$tituloPagina = 'PáginaVentas';
+$tituloPagina = 'PáginaPrincipal';
 
 
 $contenidoPrincipal=<<<EOS
-	<h1>VENTAS</h1>
+	<h1>PRINCIPAL</h1>
     <button class="open-button" onclick="openForm()">Chat</button>
 
     <div class="chat-popup" id="myForm">
          <form action="/action_page.php" class="form-container">
-            <h1>VENDER</h1>
+            <h1>Chat</h1>
 
             <label for="msg"><b>Message</b></label>
             <textarea placeholder="Type message.." name="msg" required></textarea>
@@ -27,5 +24,4 @@ $contenidoPrincipal=<<<EOS
 
 EOS;
 
-//require_once 'includes/config.php';
 require 'comun/lobby.php';
