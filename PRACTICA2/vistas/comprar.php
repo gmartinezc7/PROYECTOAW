@@ -11,18 +11,20 @@ $inicio = true;
 
 $contenidoPrincipal=<<<EOS
     <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
-	<h1>COMPRAS</h1>
-    <button class="open-button" onclick="openForm()">Chat</button>
+	<h1>COMPRAR</h1>
 
-    <div class="chat-popup" id="myForm">
-         <form action="/action_page.php" class="form-container">
-            <h1>Chat</h1>
+    <div id="myForm">
+        <form action="../Aplicacion.php" class="form-container">
 
-            <label for="msg"><b>Message</b></label>
-            <textarea placeholder="Type message.." name="msg" required></textarea>
+            <label id="compra" for="busqueda"><b>Búsqueda</b></label>
+            <textarea placeholder="Qué estás buscando?" name="Búsqueda" required></textarea>
+            <br>
 
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <button id="submit" type="submit" class="btn">Send</button>
+
+            <!--aqui faltaría poner la función que va a hacer que se muestren los productos con ese nombre/id/categoría-->
+
+
         </form>
     </div>
     

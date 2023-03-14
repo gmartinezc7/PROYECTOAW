@@ -26,11 +26,11 @@ USE `klaer`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `compra/venta`
+-- Estructura de tabla para la tabla `transaccion`
 --
 
-DROP TABLE IF EXISTS `compra/venta`;
-CREATE TABLE `compra/venta` (
+DROP TABLE IF EXISTS `transaccion`;
+CREATE TABLE `transaccion` (
   `ID` int(11) NOT NULL,
   `IDComprador` varchar(15) NOT NULL,
   `IDVendedor` varchar(15) NOT NULL,
@@ -42,11 +42,11 @@ CREATE TABLE `compra/venta` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `conversacion chat`
+-- Estructura de tabla para la tabla `conversacion`
 --
 
-DROP TABLE IF EXISTS `conversacion chat`;
-CREATE TABLE `conversacion chat` (
+DROP TABLE IF EXISTS `conversacion`;
+CREATE TABLE `conversacion` (
   `ID` int(11) NOT NULL,
   `Usuario1` varchar(15) NOT NULL,
   `Usuario2` varchar(15) NOT NULL,
@@ -84,17 +84,18 @@ CREATE TABLE `mensaje` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Estructura de tabla para la tabla `producto`
 --
 
-DROP TABLE IF EXISTS `productos`;
-CREATE TABLE `productos` (
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE `producto` (
   `ID` int(11) NOT NULL,
   `Precio` decimal(10,0) NOT NULL,
   `Nombre` varchar(15) NOT NULL,
   `Descripción` varchar(2000) NOT NULL,
   `Tipo` varchar(15) NOT NULL,
-  `Fecha` date NOT NULL
+  `Fecha` date NOT NULL,
+  `Cantidad` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -142,9 +143,9 @@ CREATE TABLE `usuario` (
 --
 
 --
--- Indices de la tabla `compra/venta`
+-- Indices de la tabla `transaccion`
 --
-ALTER TABLE `compra/venta`
+ALTER TABLE `transaccion`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `IDComprador` (`IDComprador`),
   ADD KEY `IDVendedor` (`IDVendedor`),
@@ -152,9 +153,9 @@ ALTER TABLE `compra/venta`
   ADD KEY `Admin` (`Admin`);
 
 --
--- Indices de la tabla `conversacion chat`
+-- Indices de la tabla `conversacion`
 --
-ALTER TABLE `conversacion chat`
+ALTER TABLE `conversacion`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `Usuario1` (`Usuario1`),
   ADD KEY `Usuario2` (`Usuario2`),
@@ -177,9 +178,9 @@ ALTER TABLE `mensaje`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `productos`
+-- Indices de la tabla `producto`
 --
-ALTER TABLE `productos`
+ALTER TABLE `producto`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `Precio` (`Precio`),
   ADD KEY `Nombre` (`Nombre`),
@@ -211,15 +212,15 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `compra/venta`
+-- AUTO_INCREMENT de la tabla `transaccion`
 --
-ALTER TABLE `compra/venta`
+ALTER TABLE `transaccion`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `conversacion chat`
+-- AUTO_INCREMENT de la tabla `conversacion`
 --
-ALTER TABLE `conversacion chat`
+ALTER TABLE `conversacion`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -235,9 +236,9 @@ ALTER TABLE `mensaje`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT de la tabla `producto`
 --
-ALTER TABLE `productos`
+ALTER TABLE `producto`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -251,22 +252,22 @@ ALTER TABLE `roles`
 --
 
 --
--- Filtros para la tabla `compra/venta`
+-- Filtros para la tabla `transaccion`
 --
-ALTER TABLE `compra/venta`
-  ADD CONSTRAINT `compra/venta_ibfk_1` FOREIGN KEY (`IDComprador`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `compra/venta_ibfk_2` FOREIGN KEY (`IDVendedor`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `compra/venta_ibfk_3` FOREIGN KEY (`IDProducto`) REFERENCES `productos` (`ID`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `compra/venta_ibfk_4` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE;
+ALTER TABLE `transaccion`
+  ADD CONSTRAINT `transaccion_ibfk_1` FOREIGN KEY (`IDComprador`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaccion_ibfk_2` FOREIGN KEY (`IDVendedor`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaccion_ibfk_3` FOREIGN KEY (`IDProducto`) REFERENCES `producto` (`ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaccion_ibfk_4` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `conversacion chat`
+-- Filtros para la tabla `conversacion`
 --
-ALTER TABLE `conversacion chat`
-  ADD CONSTRAINT `conversacion chat_ibfk_1` FOREIGN KEY (`IDMensaje`) REFERENCES `mensaje` (`ID`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `conversacion chat_ibfk_2` FOREIGN KEY (`Usuario1`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `conversacion chat_ibfk_3` FOREIGN KEY (`Usuario2`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `conversacion chat_ibfk_4` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE;
+ALTER TABLE `conversacion`
+  ADD CONSTRAINT `conversacion_ibfk_1` FOREIGN KEY (`IDMensaje`) REFERENCES `mensaje` (`ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `conversacion_ibfk_2` FOREIGN KEY (`Usuario1`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `conversacion_ibfk_3` FOREIGN KEY (`Usuario2`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `conversacion_ibfk_4` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `foro`

@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 
 INSERT DELAYED IGNORE INTO `roles` (`ID`, `Nombre`) VALUES
 (1, 'admin'),
-(2, 'mod'),
-(3, 'user');
+(3, 'mod'),
+(2, 'user');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -66,6 +66,34 @@ aside {
 	background-color: #83b09b;
 }
 
+h1 {
+	padding: 10px;
+	font-size: xx-large;
+    font-family: 'Lucida Sans';
+    font-variant: small-caps;
+}
+
+textarea {
+	margin-left: 20px;
+}
+
+label#compra {
+	margin-left: 20px;
+}
+
+label#venta {
+	margin-left: 20px;
+}
+
+button#submit {
+	margin-left: 110px;
+}
+
+fieldset#fsVenta {
+	margin-left: 110px;
+}
+
+
 
 
 

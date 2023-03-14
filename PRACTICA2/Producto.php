@@ -45,6 +45,26 @@ class Producto
         }
         return $result;
     }
+
+    public static function buscaPorTipo($tipo)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT * FROM Productos WHERE tipo=%d AND cantidad > 0", $tipo);
+        $productos = [];
+        $rs = $conn->query($query);
+        $result = false;
+        if ($rs) {
+            $fila = $rs->fetch_assoc();
+            if ($fila) {
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
+                $productos[] = $result;
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $productos;
+    }
     
     public static function buscaDisponibles()
     {
@@ -140,7 +160,7 @@ class Producto
 
     private $tipo;
 
-    private $fecha; /**??? */
+    private $fecha;
 
     private $stock;
 
