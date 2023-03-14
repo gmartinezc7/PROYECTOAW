@@ -3,9 +3,11 @@
 require_once 'includes/vistas/helpers/autorizacion.php'; */
 
 $tituloPagina = 'Contacto';
+$inicio = true;
 
 
 $contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>¿Quiénes somos?</h1>
     <div class="contenedor"> 
         <div class="contenido"> 

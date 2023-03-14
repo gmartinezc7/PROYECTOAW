@@ -6,9 +6,11 @@
 require_once 'includes/vistas/helpers/autorizacion.php'; */
 
 $tituloPagina = 'Página de Compras';
+$inicio = true;
 
 
 $contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>COMPRAS</h1>
     <button class="open-button" onclick="openForm()">Chat</button>
 
