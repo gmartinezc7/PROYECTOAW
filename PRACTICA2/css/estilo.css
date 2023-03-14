@@ -1,7 +1,11 @@
+
+/*fondo de detrás*/
 body {
-	background-color: #CDCDCD;
+	background-color: #ffffff;
+	/*background-color: #e7d8c9;*/
 }
 
+/*contenedor entero*/
 div#contenedor {
 	width: 1800px;
 	margin: auto;
@@ -10,13 +14,16 @@ div#contenedor {
 	margin-top: 20px;
 }
 
+/*header donde está el logo y los botones de navegación*/
 header {
 	padding: 20px;
 	height: 120px;
-	background-color: #c73f3f;
+	background-color: #83b09b;
+	/*background-color: #c73f3f;*/
 	color: white;
 }
 
+/*elementos del header (referencias)*/
 header a, header a:visited {
     font-size: xx-large;
     font-family: 'Lucida Sans';
@@ -35,24 +42,29 @@ header a:hover {
 	text-decoration: underline;
 }
 
-
+/*plano blanco del medio*/
 main {
 	padding: 10px;
 	float: left;
 	min-height: 600px;
-	width: 1500px;
+	width: 1600px;
+	/*width: 1780px;*/
 	background-color: white;
 }
 
 footer	 {
 	clear: both;
 	padding: 20px;
-	background-color: #303030;
+	background-color: #83b09b;
 	color: white;
 	text-align: center;
 }
 
-
+aside {
+	padding: 10px;
+	float: auto;
+	background-color: #83b09b;
+}
 
 
 
@@ -79,10 +91,8 @@ nav a:hover {
 
 aside {
 	padding: 10px;
-	float: right;
-	width: 170px;
-	height: 400px;
-	background-color: #dddddd;
+	float: auto;
+	background-color: #83b09b;
 }
 
 

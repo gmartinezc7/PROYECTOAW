@@ -1,4 +1,4 @@
 <aside id="sidebarDer">
-	<a href='login.php'> Login </a>
-	<a href='registrarse.php'> Registro </a>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='login.php'> LOGIN </a>
+	&nbsp;&nbsp;<a href='registrarse.php'> REGISTRO </a>
 </aside>
