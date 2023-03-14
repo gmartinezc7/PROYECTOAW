@@ -144,7 +144,7 @@ class Producto
 
     private $stock;
 
-    private function __construct($nombreProd, $precio, $descripcion, $tipo, $fecha, $stock, $id)
+    private function __construct($nombreProd, $precio, $descripcion, $tipo, $fecha, $stock, $id = null)
     {
         $this->id = $id;
         $this->nombreProd = $nombreProd;
