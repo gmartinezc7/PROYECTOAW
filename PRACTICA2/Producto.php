@@ -1,4 +1,5 @@
 <?php
+require 'Aplicacion.php';
 
 class Producto
 {

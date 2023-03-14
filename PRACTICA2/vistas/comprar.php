@@ -1,6 +1,8 @@
 
 
 <?php
+
+require '../Producto.php';
 //require ("./comun/pie.php"); 
 /**require_once 'includes/config.php';
 require_once 'includes/vistas/helpers/autorizacion.php'; */
@@ -9,7 +11,7 @@ $tituloPagina = 'Página de Compras';
 $inicio = true;
 
 
-//$busquedaProductos = Producto::buscaDisponibles();
+
 
 $codigohtml;
 
@@ -25,7 +27,8 @@ EOS;
 
 function buildFormProds(){
     $codigohtml = 'hola';
-    /*foreach($producto as $busquedaProductos){
+    /*$busquedaProductos = Producto::buscaDisponibles();
+    foreach($producto as $busquedaProductos){
 
         $nombre = $producto.getNombreProd();
         $descripcion = $producto.getDescripcion();
@@ -54,5 +57,4 @@ function buildFormProds(){
 
 
 
-require '../Producto.php';
 require 'comun/lobby.php';
