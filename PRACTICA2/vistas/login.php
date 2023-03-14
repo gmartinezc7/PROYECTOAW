@@ -3,6 +3,7 @@
 function buildFormularioLogin($username='', $password='')
 {
     return <<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
     <form id="formLogin" action="procesarLogin.php" method="POST">
         <fieldset>
             <legend>Usuario y contraseña</legend>

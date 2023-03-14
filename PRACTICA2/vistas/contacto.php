@@ -6,6 +6,7 @@ $tituloPagina = 'Contacto';
 
 
 $contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>¿Quiénes somos?</h1>
     <div class="contenedor"> 
         <div class="contenido"> 

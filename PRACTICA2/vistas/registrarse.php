@@ -3,6 +3,7 @@
 function buildFormularioRegistro($username='', $password='', $email='',$tfl='',$dir='',$suscrib='') // Hay que procesar el registro creandolo en la base de datos, ademas comprobar si ya existe
 {
     return <<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
     <form id="formLogin" action="procesarRegistro.php" method="POST">
         <fieldset>
             <legend>Nuevo usuario</legend>

@@ -9,6 +9,7 @@ $tituloPagina = 'PáginaVentas';
 
 
 $contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>VENTAS</h1>
     <button class="open-button" onclick="openForm()">Chat</button>
 

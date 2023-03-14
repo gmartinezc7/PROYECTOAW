@@ -6,6 +6,7 @@ $tituloPagina = 'PáginaPrincipal';
 
 
 $contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>PRINCIPAL</h1>
     <button class="open-button" onclick="openForm()">Chat</button>
 
