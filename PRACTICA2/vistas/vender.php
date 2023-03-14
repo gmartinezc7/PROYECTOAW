@@ -6,6 +6,7 @@
 require_once 'includes/vistas/helpers/autorizacion.php'; */
 
 $tituloPagina = 'PáginaVentas';
+$inicio = true;
 
 
 $contenidoPrincipal=<<<EOS

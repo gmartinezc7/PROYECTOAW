@@ -3,6 +3,7 @@
 require_once 'includes/vistas/helpers/autorizacion.php'; */
 
 $tituloPagina = 'Chat';
+$inicio = true;
 
 
 $contenidoPrincipal=<<<EOS

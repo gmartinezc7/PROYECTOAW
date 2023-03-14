@@ -1,4 +1,17 @@
 <?php
+$tituloPagina = 'Página Registro';
+$inicio = true;
+
+
+$contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
+	<h1>PÁGINA REGISTRO</h1>
+    <div class="contenedor">
+        <p> Este es el espacio para el Registro </p>
+       
+    </div>
+
+EOS;
 
 function buildFormularioRegistro($username='', $password='', $email='',$tfl='',$dir='',$suscrib='') // Hay que procesar el registro creandolo en la base de datos, ademas comprobar si ya existe
 {
@@ -18,3 +31,5 @@ function buildFormularioRegistro($username='', $password='', $email='',$tfl='',$
     </form>
     EOS;
 }
+
+require 'comun/lobby.php';

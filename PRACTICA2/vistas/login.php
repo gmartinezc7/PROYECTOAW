@@ -1,5 +1,20 @@
 <?php
 
+$tituloPagina = 'Página Login';
+$inicio = true;
+
+
+
+$contenidoPrincipal=<<<EOS
+    <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
+	<h1>PÁGINA LOGIN</h1>
+    <div class="contenedor">
+        <p> Este es el espacio para el Login </p>
+       
+    </div>
+
+EOS;
+
 function buildFormularioLogin($username='', $password='')
 {
     return <<<EOS
@@ -14,4 +29,4 @@ function buildFormularioLogin($username='', $password='')
     </form>
     EOS;
 }
-require ("./comun/pie.php"); 
+require 'comun/lobby.php';

@@ -3,6 +3,7 @@
 require_once 'includes/vistas/helpers/autorizacion.php'; */
 
 $tituloPagina = 'Foro';
+$inicio = true;
 
 $contenidoPrincipal=<<<EOS
 	<link rel="stylesheet" type="text/css" href='../css/estilo.css' />

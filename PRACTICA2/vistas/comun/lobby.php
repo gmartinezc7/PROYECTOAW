@@ -10,7 +10,7 @@
 	<body>
 		<div id="contenedor">
 		<?php
-
+		
 			require('cabecera.php');
 
 		?>

@@ -3,6 +3,7 @@
 <?php
 
 $tituloPagina = 'PáginaPrincipal';
+$inicio = true;
 
 
 $contenidoPrincipal=<<<EOS
