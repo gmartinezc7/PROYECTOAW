@@ -18,12 +18,17 @@ $contenidoPrincipal=<<<EOS
 	<h1>Página principal</h1>
 	<p> PÁGINA DE INICIO DE KLAER </p>
 EOS;
+
+
+
+
 if ($conn->connect_error){
     die("La conexión ha fallado" . $conn->connect_error);
 }else $contenidoPrincipal .= '<p>***La conexión es correcta***</p>';
 
 $conn->close();
 $contenidoPrincipal .= '<p>**Cerrando la conexión**</p>';
+
 
 
 require 'vistas/comun/lobby.php';

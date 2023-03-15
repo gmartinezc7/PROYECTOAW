@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 require_once '/Aplicacion.php';
+=======
+require_once 'Aplicacion.php';
+>>>>>>> ddac178587a6d9bf406585cfae20ae83d8f39ec0
 
 /**
  * Parámetros de conexión a la BD

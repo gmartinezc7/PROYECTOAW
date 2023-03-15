@@ -1,6 +1,8 @@
 
 
 <?php
+
+require '../Producto.php';
 //require ("./comun/pie.php"); 
 /**require_once 'includes/config.php';
 require_once 'includes/vistas/helpers/autorizacion.php'; */
@@ -9,26 +11,50 @@ $tituloPagina = 'Página de Compras';
 $inicio = true;
 
 
+
+
+$codigohtml;
+
+
+$busquedaFor = buildFormProds();
 $contenidoPrincipal=<<<EOS
     <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 	<h1>COMPRAR</h1>
-
-    <div id="myForm">
-        <form action="../Aplicacion.php" class="form-container">
-
-            <label id="compra" for="busqueda"><b>Búsqueda</b></label>
-            <textarea placeholder="Qué estás buscando?" name="Búsqueda" required></textarea>
-            <br>
-
-            <button id="submit" type="submit" class="btn">Send</button>
-
-            <!--aqui faltaría poner la función que va a hacer que se muestren los productos con ese nombre/id/categoría-->
-
-
-        </form>
-    </div>
-    
-
+    $busquedaFor
 EOS;
+
+
+
+function buildFormProds(){
+    $codigohtml = 'hola';
+    /*$busquedaProductos = Producto::buscaDisponibles();
+    foreach($producto as $busquedaProductos){
+
+        $nombre = $producto.getNombreProd();
+        $descripcion = $producto.getDescripcion();
+        $tipo = $producto.getNombreProd();
+        $fecha = $producto.getFecha();
+        $stock = $producto.getStock();
+
+        
+       
+        $codigohtml .= <<<EOS
+        <p> Nombre: $nombre Descripcion: $descripcion </p>
+        EOS;
+        
+
+        
+
+
+    }*/
+
+    return $codigohtml;
+
+}
+
+
+
+
+
 
 require 'comun/lobby.php';
