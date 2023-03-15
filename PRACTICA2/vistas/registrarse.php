@@ -15,4 +15,4 @@ $contenidoPrincipal = <<<EOS
 	$formulario
 EOS;
 
-require 'vistas/comun/lobby.php';
+require 'comun/lobby.php';
