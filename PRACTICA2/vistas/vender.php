@@ -70,7 +70,7 @@ function procesarFormulario()
         $fecha = null; 
     }
     
-    if(isset($_POST($amount)){
+    if(isset($_POST($amount))){
         $cantidad = $_POST($amount); 
     } else {
         $cantidad = null; 

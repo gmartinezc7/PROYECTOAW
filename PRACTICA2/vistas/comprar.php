@@ -26,8 +26,8 @@ EOS;
 
 
 function buildFormProds(){
-    $codigohtml = 'hola';
-    /*$busquedaProductos = Producto::buscaDisponibles();
+    //$codigohtml = 'hola';
+    $busquedaProductos = Producto::buscaDisponibles();
     foreach($producto as $busquedaProductos){
 
         $nombre = $producto.getNombreProd();
@@ -46,7 +46,7 @@ function buildFormProds(){
         
 
 
-    }*/
+    }
 
     return $codigohtml;
 

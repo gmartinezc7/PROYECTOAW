@@ -1,9 +1,10 @@
 <?php
 
-require_once '/config.php';
+require_once '../config.php';
 require_once '../FormularioRegistro.php';
 
 $tituloPagina = 'Registro';
+$inicio = true;
 
 $form = new FormularioRegistro(""); 
 $form->gestiona();

@@ -2,6 +2,7 @@
 	require_once '/Aplicacion.php';
 	require_once  '/Usuario.php';
 	require_once  '/Formulario.php';
+	
 
 	class FormularioRegistro extends Form
 	{
@@ -15,18 +16,18 @@
 		protected function generaCamposFormulario($datosIniciales, $errores = [])
 		{
 			$nombreUsuario = '';
-			$app = Aplicacion::getSingleton();
+			$app = Aplicacion::getInstance();
 
 			if (!empty($datosIniciales))
 			{
-				$nombreUsuario = isset($datosIniciales['nombreUsuario']) ? $datosIniciales['nombreUsuario'] : $nombreUsuario;
+				$nombreUsuario = isset($datosIniciales['usuario']) ? $datosIniciales['usuario'] : $nombreUsuario;
 			}
 
 			$html = <<< HTML
 				<fieldset>
 					<legend>Usuario y contraseña</legend>
 					<div class="grupo-control">
-						<label>Nombre de usuario:</label> <input type="text" name="nombreUsuario"/>
+						<label>Nombre de usuario:</label> <input type="text" name="usuario"/>
 					</div>
 					<div class="grupo-control">
 						<label>Nombre:</label> <input class="control" type="text" name="nombre"/>

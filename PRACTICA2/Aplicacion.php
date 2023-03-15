@@ -114,7 +114,9 @@ class Aplicacion
 	 */
 	public function getConexionBd() // comprobar 
 	{
+		//echo "HOLA1";
 	    $this->compruebaInstanciaInicializada();
+		//echo "HOLA2";
 		if (! $this->conn ) {
 			$bdHost = $this->bdDatosConexion['host'];
 			$bdUser = $this->bdDatosConexion['user'];

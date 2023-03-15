@@ -4,6 +4,7 @@ require_once '../config.php';
 require_once '../FormularioLogin.php';
 
 $tituloPagina = 'Login';
+$inicio = true;
 
 $form = new FormularioLogin("login.php"); 
 $form->gestiona();
@@ -14,4 +15,4 @@ $contenidoPrincipal = <<<EOS
 	$formulario
 EOS;
 
-require 'vistas/comun/lobby.php';
+require __DIR__.'/comun/lobby.php';

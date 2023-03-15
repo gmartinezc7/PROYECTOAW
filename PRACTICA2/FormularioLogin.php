@@ -1,7 +1,7 @@
 <?php
-	require_once  '/Aplicacion.php';
-	require_once  '/Usuario.php';
-	require_once  '/Formulario.php';
+	require_once  'Aplicacion.php';
+	require_once  'Usuario.php';
+	require_once  'Formulario.php';
 
 	class FormularioLogin extends Form
 	{
@@ -15,7 +15,7 @@
 		protected function generaCamposFormulario($datosIniciales, $errores = [])
 		{
 			$nombreUsuario = '';
-			$app = Aplicacion::getSingleton();
+			$app = Aplicacion::getInstance();
 
 			if (!empty($datosIniciales))
 			{
