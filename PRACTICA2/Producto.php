@@ -1,5 +1,5 @@
 <?php
-require 'Aplicacion.php';
+
 
 require_once 'Aplicacion.php';
 
