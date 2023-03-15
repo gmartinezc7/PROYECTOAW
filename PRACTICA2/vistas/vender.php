@@ -1,11 +1,9 @@
-
-
 <?php
 //require ("./comun/pie.php"); 
 /**require_once 'includes/config.php';
 require_once 'includes/vistas/helpers/autorizacion.php'; */
 
-require_once 'Producto.php';
+require_once '../Producto.php';
 
 $tituloPagina = 'PáginaVentas';
 $inicio = true;
@@ -40,37 +38,37 @@ EOS;
 function procesarFormulario()
 {
     $html = '';
-    if(isset($_POST($productName))){
+    if(isset($_POST[$productName])){
         $nombre = $_POST($productName);
     } else {
         $nombre = null; 
     }
 
-    if(isset($_POST($productPrice))){
+    if(isset($_POST[$productPrice])){
         $precio = $_POST($productPrice); 
     } else {
         $precio = null; 
     }
      
-    if(isset($_POST($productDescr))){
+    if(isset($_POST[$productDescr])){
         $descripcion = $_POST($productDescr); 
     } else {
         $descripcion = null; 
     }
 
-    if(isset($_POST($productType))){
+    if(isset($_POST[$productType])){
         $tipo = $_POST($productType); 
     } else {
         $tipo = null; 
     }
 
-    if(isset($_POST($productDate))){
+    if(isset($_POST[$productDate])){
         $fecha = $_POST($productDate); 
     } else {
         $fecha = null; 
     }
     
-    if(isset($_POST($amount))){
+    if(isset($_POST[$amount])){
         $cantidad = $_POST($amount); 
     } else {
         $cantidad = null; 
