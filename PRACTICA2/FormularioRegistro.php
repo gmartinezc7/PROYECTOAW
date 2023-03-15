@@ -1,7 +1,7 @@
 <?php
-	require_once '/Aplicacion.php';
-	require_once  '/Usuario.php';
-	require_once  '/Formulario.php';
+	require_once '../Aplicacion.php';
+	require_once  '../Usuario.php';
+	require_once  '../Formulario.php';
 	
 
 	class FormularioRegistro extends Form
@@ -24,32 +24,32 @@
 			}
 
 			$html = <<< HTML
-				<fieldset>
-					<legend>Usuario y contraseña</legend>
-					<div class="grupo-control">
-						<label>Nombre de usuario:</label> <input type="text" name="usuario"/>
-					</div>
-					<div class="grupo-control">
-						<label>Nombre:</label> <input class="control" type="text" name="nombre"/>
-					</div>
-                    <div class="grupo-control">
-						<label>Apellidos:</label> <input class="control" type="text" name="apellidos"/>
-					</div>
-                    <div class="grupo-control">
-						<label>email:</label> <input class="control" type="email" name="email"/>
-					</div>
-                    <div class="grupo-control">
-						<label>Teléfono:</label> <input class="control" type="tell" name="telefono"/>
-					</div>
-                    <div class="grupo-control">
-						<label>Dirección:</label> <input class="control" type="text" name="direccion"/>
-					</div>
-                    <div class="grupo-control">
-						<label>Contraseña:</label> <input type="password" name="password"/>
-					</div>
-					<div class="grupo-control"><button type="submit" name="registro">Registrar</button></div>
-				</fieldset>
-			HTML;
+                <fieldset>
+                    <legend>Usuario y contraseña</legend>
+                        <div class="grupo-control">
+                        <label>Nombre de usuario:</label> <input type="text" name="usuario"/>
+                        </div>
+                        <div class="grupo-control">
+                        <label>Nombre:</label> <input class="control" type="text" name="nombre"/>
+                        </div>
+                        <div class="grupo-control">
+                        <label>Apellidos:</label> <input class="control" type="text" name="apellidos"/>
+                        </div>
+                        <div class="grupo-control">
+                        <label>email:</label> <input class="control" type="email" name="email"/>
+                        </div>
+                        <div class="grupo-control">
+                        <label>Teléfono:</label> <input class="control" type="tell" name="telefono"/>
+                        </div>
+                        <div class="grupo-control">
+                        <label>Dirección:</label> <input class="control" type="text" name="direccion"/>
+                        </div>
+                        <div class="grupo-control">
+                        <label>Contraseña:</label> <input type="password" name="password"/>
+                        </div>
+                        <div class="grupo-control"><button type="submit" name="registro">Registrar</button></div>
+                </fieldset>
+            HTML;
 
 			return $html;
 		}
