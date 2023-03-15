@@ -1,12 +1,14 @@
 <?php
 
+require_once 'Aplicacion.php';
+
 class Producto
 {
 
     
-    public static function crea($id, $nombre, $precio, $descripcion, $tipo, $fecha, $cantidad)
+    public static function crea($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad)
     {
-        $producto = new Producto($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad, $id);
+        $producto = new Producto($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad);
         return $producto->guarda();
     }
 

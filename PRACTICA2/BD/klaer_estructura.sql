@@ -84,11 +84,11 @@ CREATE TABLE `mensaje` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Estructura de tabla para la tabla `productos`
 --
 
-DROP TABLE IF EXISTS `producto`;
-CREATE TABLE `producto` (
+DROP TABLE IF EXISTS `productos`;
+CREATE TABLE `productos` (
   `ID` int(11) NOT NULL,
   `Precio` decimal(10,0) NOT NULL,
   `Nombre` varchar(15) NOT NULL,
@@ -178,9 +178,9 @@ ALTER TABLE `mensaje`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `producto`
+-- Indices de la tabla `productos`
 --
-ALTER TABLE `producto`
+ALTER TABLE `productos`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `Precio` (`Precio`),
   ADD KEY `Nombre` (`Nombre`),
@@ -236,9 +236,9 @@ ALTER TABLE `mensaje`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
+-- AUTO_INCREMENT de la tabla `productos`
 --
-ALTER TABLE `producto`
+ALTER TABLE `productos`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -257,7 +257,7 @@ ALTER TABLE `roles`
 ALTER TABLE `transaccion`
   ADD CONSTRAINT `transaccion_ibfk_1` FOREIGN KEY (`IDComprador`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
   ADD CONSTRAINT `transaccion_ibfk_2` FOREIGN KEY (`IDVendedor`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaccion_ibfk_3` FOREIGN KEY (`IDProducto`) REFERENCES `producto` (`ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaccion_ibfk_3` FOREIGN KEY (`IDProducto`) REFERENCES `productos` (`ID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `transaccion_ibfk_4` FOREIGN KEY (`Admin`) REFERENCES `usuario` (`Usuario`) ON UPDATE CASCADE;
 
 --

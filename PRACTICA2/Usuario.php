@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Aplicacion.php';
+
 class Usuario
 {
 
@@ -18,9 +20,9 @@ class Usuario
         return false;
     }
     
-    public static function crea($nombreUsuario, $password, $nombre, $apellidos, $rol, $direccion)
+    public static function crea($nombreUsuario, $password, $nombre, $apellidos, $rol, $direccion, $email)
     {
-        $user = new Usuario($nombreUsuario, self::hashPassword($password), $nombre, $apellidos, $direccion);
+        $user = new Usuario($nombreUsuario, self::hashPassword($password), $nombre, $apellidos, $direccion, $email);
         $user->añadeRol($rol);
         return $user->guarda();
     }
@@ -34,7 +36,7 @@ class Usuario
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Usuario($fila['nombreUsuario'], $fila['password'], $fila['nombre'], $fila['apellidos'] , $fila['direccion'], $fila['id']);
+                $result = new Usuario($fila['nombreUsuario'], $fila['password'], $fila['nombre'], $fila['apellidos'] , $fila['direccion'], $fila['email'],  $fila['id']);
             }
             $rs->free();
         } else {
@@ -52,7 +54,7 @@ class Usuario
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Usuario($fila['nombreUsuario'], $fila['password'], $fila['nombre'], $fila['apellidos'] , $fila['direccion'], $fila['id']);
+                $result = new Usuario($fila['nombreUsuario'], $fila['password'], $fila['nombre'], $fila['apellidos'] , $fila['direccion'], $fila['email'] ,$fila['id']);
             }
             $rs->free();
         } else {
@@ -95,12 +97,13 @@ class Usuario
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO Usuarios(nombreUsuario, password, nombre, apellidos, direccion) VALUES ('%s', '%s', '%s', '%s', '%s')"
+        $query=sprintf("INSERT INTO Usuarios(nombreUsuario, password, nombre, apellidos, direccion, email) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')"
             , $conn->real_escape_string($usuario->nombreUsuario)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->nombre)
             ,$conn->real_escape_string($usuario->apellidos)
             ,$conn->real_escape_string($usuario->direccion)
+            ,$conn->real_escape_string($usuario->email)
         );
         if ( $conn->query($query) ) {
             $usuario->id = $conn->insert_id;
@@ -131,12 +134,13 @@ class Usuario
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Usuarios U SET nombreUsuario = '%s', nombre='%s', password='%s',apellidos='%s',direccion='%s' WHERE U.id=%d"
+        $query=sprintf("UPDATE Usuarios U SET nombreUsuario = '%s', nombre='%s', password='%s',apellidos='%s',direccion='%s', email='%s' WHERE U.id=%d"
             , $conn->real_escape_string($usuario->nombreUsuario)
             , $conn->real_escape_string($usuario->nombre)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->apellidos)
             , $conn->real_escape_string($usuario->direccion)
+            , $conn->real_escape_string($usuario->email)
             , $usuario->id
         );
         if ( $conn->query($query) ) {
@@ -202,7 +206,9 @@ class Usuario
 
     private $roles;
 
-    private function __construct($nombreUsuario, $password, $nombre, $apellidos, $direccion, $id = null, $roles = [])
+    private $email;
+
+    private function __construct($nombreUsuario, $password, $nombre, $apellidos, $direccion, $email, $id = null, $roles = [])
     {
         $this->id = $id;
         $this->nombreUsuario = $nombreUsuario;
@@ -211,6 +217,7 @@ class Usuario
         $this->nombre = $nombre;
         $this->roles = $roles;
         $this->direccion = $direccion;
+        $this->email = $email;
     }
 
     public function getId()
@@ -247,6 +254,11 @@ class Usuario
     public function getDireccion()
     {
         return $this->direccion;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     public function tieneRol($role)

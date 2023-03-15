@@ -1,11 +1,14 @@
 <?php
 
+require_once '../../Aplicacion.php';
+require_once '../../Producto.php';
+
 class Transaccion
 {
 
-    public static function crea($idComprador, $idVendedor, $admin, $idTransaccion, $idProd, $fecha, $cantidad)
+    public static function crea($idComprador, $idVendedor, $admin, $idProd, $fecha, $cantidad)
     {
-        $transaccion = new Transaccion($idComprador, $idVendedor, $admin, $idProd, $fecha, $cantidad, $idTransaccion);
+        $transaccion = new Transaccion($idComprador, $idVendedor, $admin, $idProd, $fecha, $cantidad);
         return $transaccion->guarda();
     }
 

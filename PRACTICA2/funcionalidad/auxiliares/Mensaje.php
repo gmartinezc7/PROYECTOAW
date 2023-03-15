@@ -1,5 +1,8 @@
 <?php
 
+
+require_once '../../Aplicacion.php';
+
 class Mensaje 
 
 {
