@@ -7,13 +7,14 @@ require_once '../Producto.php';
 
 $tituloPagina = 'PáginaVentas';
 $inicio = true;
+$html = '';
 
 
 $contenidoPrincipal = <<<EOS
 <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
 <h1>VENDER</h1>
 
-    <form action="vender.php" class="form-container" method="POST" onsubmit="procesarFormulario()">
+    <form action="vender.php" class="form-container" method="POST">
 
         <fieldset>
             <legend>Producto</legend>
@@ -21,57 +22,56 @@ $contenidoPrincipal = <<<EOS
             <div><label>Price:</label> <input type="text" name="productPrice"  /></div>
             <div><label>Description:</label> <input type="text" name="productDescr"  /></div>
             <div><label>Type:</label> <input type="text" name="productType"  /></div>
-            <div><label>Date:</label> <input type="text" name="productDate"  /></div>
+            <div><label>Date:</label> <input type="date" name="productDate"  /></div>
             <div><label>Amount:</label> <input type="text" name="amount"  /></div>
 
-            <div><button type="submit">Entrar</button></div>
+            <div><button type="submit" name="boton">Entrar</button></div>
         </fieldset>
 
         <!--aqui faltaría poner la función que va a hacer que se muestren los productos con ese nombre/id/categoría-->
 
     </form>
-    
 
 EOS;
 
+// Procesamiento del formulario 
 
-function procesarFormulario()
-{
-    $html = '';
-    if(isset($_POST[$productName])){
-        $nombre = $_POST($productName);
+if(isset($_POST['boton'])) {
+
+    if(isset($_POST['productName'])){
+        $nombre = $_POST['productName'];
     } else {
-        $nombre = null; 
+        $nombre = null;
     }
 
-    if(isset($_POST[$productPrice])){
-        $precio = $_POST($productPrice); 
+    if(isset($_POST['productPrice'])){
+        $precio = $_POST['productPrice'];
     } else {
-        $precio = null; 
+        $precio = null;
     }
      
-    if(isset($_POST[$productDescr])){
-        $descripcion = $_POST($productDescr); 
+    if(isset($_POST['productDescr'])){
+        $descripcion = $_POST['productDescr'];
     } else {
-        $descripcion = null; 
+        $descripcion = null;
     }
 
-    if(isset($_POST[$productType])){
-        $tipo = $_POST($productType); 
+    if(isset($_POST['productType'])){
+        $tipo = $_POST['productType'];
     } else {
-        $tipo = null; 
+        $tipo = null;
     }
 
-    if(isset($_POST[$productDate])){
-        $fecha = $_POST($productDate); 
+    if(isset($_POST['productDate'])){
+        $fecha = $_POST['productDate'];
     } else {
-        $fecha = null; 
+        $fecha = null;
     }
     
-    if(isset($_POST[$amount])){
-        $cantidad = $_POST($amount); 
+    if(isset($_POST['amount'])){
+        $cantidad = $_POST['amount'];
     } else {
-        $cantidad = null; 
+        $cantidad = null;
     }
     
     if($nombre == null or $fecha == null or $precio == null or $cantidad == null or $tipo == null or $descripcion == null){
@@ -80,21 +80,19 @@ function procesarFormulario()
         $prod = Producto::crea($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad);
        
         if($prod){
-            $html .= 'Producto(s) registrado con exito';
+            $html .= '<p> Producto(s) registrado con exito con los siguientes campos: </p>';
+            $html .= <<<EOS
+            <p> Nombre: $nombre Precio: $precio Descripcion: $descripcion Tipo: $tipo Fecha: $fecha Cantidad disponible: $cantidad </p>
+            EOS;
+
         } else {
             $html .= 'Se ha producido un error durante el registro del producto, intentelo de nuevo';
         }
-    } 
+    }
     
-    return $html; 
+   $contenidoPrincipal .= $html;
 }
 
-function buildFormularioProductUpload()
-{
-    return <<<EOS
-        <p>Prueba Formulario Product Upload </p>
-    EOS;
-}
 
-//require_once 'includes/config.php';
+require_once '../config.php';
 require 'comun/lobby.php';

@@ -11,11 +11,6 @@ $tituloPagina = 'Página de Compras';
 $inicio = true;
 
 
-
-
-
-
-
 $busquedaFor = buildFormProds();
 $contenidoPrincipal=<<<EOS
     <link rel="stylesheet" type="text/css" href='../css/estilo.css' />

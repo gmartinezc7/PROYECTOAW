@@ -96,13 +96,13 @@ class Producto
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO Productos(precio,nombre,descripcion,tipo,fecha,cantidad) VALUES ('%d', '%s', '%s', '%s','%s','%d')"
-            , $conn->real_escape_string($producto->nombre)
+        $query=sprintf("INSERT INTO Productos(nombre,precio,descripcion,tipo,fecha,cantidad) VALUES ('%s', '%d', '%s', '%s','%s','%d')"
+            , $conn->real_escape_string($producto->nombreProd)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
             , $conn->real_escape_string($producto->tipo)
             , $conn->real_escape_string($producto->fecha)
-            , $conn->real_escape_string($producto->cantidad)
+            , $conn->real_escape_string($producto->stock)
         );
         if ( $conn->query($query) ) {
             $producto->id = $conn->insert_id;
@@ -119,12 +119,12 @@ class Producto
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query=sprintf("UPDATE Productos P SET nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d' WHERE P.id=%d"   
-            , $conn->real_escape_string($producto->nombre)
+            , $conn->real_escape_string($producto->nombreProd)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
             , $conn->real_escape_string($producto->tipo)
             , $conn->real_escape_string($producto->fecha)
-            , $conn->real_escape_string($producto->cantidad)
+            , $conn->real_escape_string($producto->stock)
             , $producto->id
         );
         
