@@ -16,7 +16,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href='chat.php'> Chat </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href='contacto.php'> Contacto </a>";
+            <a href='contacto.php'> Contacto </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='carrito.php'> Carrito </a>";
             
         }else{
             echo "<img src='logo.png' alt='Logo Klaer' width='130' height='130'>
@@ -32,7 +34,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href='vistas/chat.php'> Chat </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href='vistas/contacto.php'> Contacto </a>";
+            <a href='vistas/contacto.php'> Contacto </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='vistas/carrito.php'> Carrito </a>";
         }
         ?>
 	

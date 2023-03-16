@@ -36,10 +36,8 @@ function buildFormProds(){
         $codigohtml .= <<<EOS
         <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock</p>
         EOS;
+        echo "hola";
         
-
-        
-
 
     }
 
