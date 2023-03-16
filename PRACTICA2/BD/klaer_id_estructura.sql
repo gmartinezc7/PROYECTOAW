@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `klaer_id`
+-- Base de datos: `klaer`
 --
-CREATE DATABASE IF NOT EXISTS `klaer_id` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `klaer_id`;
+CREATE DATABASE IF NOT EXISTS `klaer` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `klaer`;
 
 -- --------------------------------------------------------
 
