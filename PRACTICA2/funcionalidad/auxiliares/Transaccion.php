@@ -12,6 +12,79 @@ class Transaccion
         return $transaccion->guarda();
     }
 
+    public static function productosVendidos($idUsuario){
+        $html = <<<EOS
+        <h1> Productos vendidos </h1>
+        EOS;
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT T.idProd,T.cantidad,T.fecha FROM Transaccion T WHERE T.idVendedor = %d"
+        , $idUsuario
+        );
+        
+        $rs = $conn->query($query);
+
+        if($rs){
+            while($info = $rs->fetch_assoc()){
+                $queryAux = sprintf("SELECT P.nombre FROM Productos P WHERE P.id= %d"
+                ,$info['idProd']);
+                $rs_aux = $conn->query($queryAux);
+                if($rs_aux){
+                    $infoProd = $rs_aux->fetch_assoc();
+                    $nombre = $infoProd['nombre'];
+                    $fecha = $info['fecha'];
+                    $cantidad = $info['cantidad'];
+                    $html .= <<<EOS
+                    <p> Producto : $nombre , Fecha de compra : $fecha , Cantidad : $cantidad </p>
+                    EOS;
+                } else {
+                    $html = '';
+                }
+            }
+           
+        } else {
+            $html = '';
+        }
+
+        return $html;
+    }
+
+    public static function productosComprados($idUsuario)
+    {
+        $html = <<<EOS
+        <h1> Productos comprados </h1>
+        EOS;
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT T.idProd,T.cantidad,T.fecha FROM Transaccion T WHERE T.idComprador = %d"
+        , $idUsuario
+        );
+        
+        $rs = $conn->query($query);
+
+        if($rs){
+            while($info = $rs->fetch_assoc()){
+                $queryAux = sprintf("SELECT P.nombre FROM Productos P WHERE P.id= %d"
+                ,$info['idProd']);
+                $rs_aux = $conn->query($queryAux);
+                if($rs_aux){
+                    $infoProd = $rs_aux->fetch_assoc();
+                    $nombre = $infoProd['nombre'];
+                    $fecha = $info['fecha'];
+                    $cantidad = $info['cantidad'];
+                    $html .= <<<EOS
+                    <p> Producto : $nombre , Fecha de compra : $fecha , Cantidad : $cantidad </p>
+                    EOS;
+                } else {
+                    $html = '';
+                }
+            }
+           
+        } else {
+            $html = '';
+        }
+
+        return $html;
+    }
+
     private static function inserta($transaccion)
     {
         $obj = Producto::buscaPorId($transaccion->idProd);
