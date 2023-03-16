@@ -79,11 +79,12 @@ class Producto
         $result = false;
         $disponibles = [];
         if ($rs) {
-            $fila = $rs->fetch_assoc();
-            if ($fila) {
-                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
-                $disponibles[] = $result;
-            }
+           while ($fila = $rs->fetch_assoc()){
+                if ($fila) {
+                    $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
+                    $disponibles[] = $result;
+                }
+           }
             $rs->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
