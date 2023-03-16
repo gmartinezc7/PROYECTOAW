@@ -13,7 +13,7 @@ $inicio = true;
 
 
 
-$codigohtml;
+
 
 
 $busquedaFor = buildFormProds();
@@ -26,20 +26,20 @@ EOS;
 
 
 function buildFormProds(){
-    //$codigohtml = 'hola';
+    $codigohtml = '';
     $busquedaProductos = Producto::buscaDisponibles();
-    foreach($producto as $busquedaProductos){
+    foreach($busquedaProductos as $producto){
 
-        $nombre = $producto.getNombreProd();
-        $descripcion = $producto.getDescripcion();
-        $tipo = $producto.getNombreProd();
-        $fecha = $producto.getFecha();
-        $stock = $producto.getStock();
+        $nombre = $producto->getNombreProd();
+        $descripcion = $producto->getDescripcion();
+        $tipo = $producto->getNombreProd();
+        $fecha = $producto->getFecha();
+        $stock = $producto->getStock();
 
         
        
         $codigohtml .= <<<EOS
-        <p> Nombre: $nombre Descripcion: $descripcion </p>
+        <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock</p>
         EOS;
         
 

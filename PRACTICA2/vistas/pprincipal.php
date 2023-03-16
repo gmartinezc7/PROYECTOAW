@@ -27,3 +27,4 @@ $contenidoPrincipal=<<<EOS
 EOS;
 
 require 'comun/lobby.php';
+require '../config.php';

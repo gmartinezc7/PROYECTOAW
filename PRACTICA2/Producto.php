@@ -2,6 +2,7 @@
 
 
 require_once 'Aplicacion.php';
+require_once 'config.php';
 
 class Producto
 {
@@ -71,9 +72,8 @@ class Producto
     
     public static function buscaDisponibles()
     {
-        echo "error salta aqui 1";
+        
         $conn = Aplicacion::getInstance()->getConexionBd();
-        echo "error salta aqui 2";
         $query = sprintf("SELECT * FROM Productos WHERE id> %d", 0);
         $rs = $conn->query($query);
         $result = false;
