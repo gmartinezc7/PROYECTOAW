@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-03-2023 a las 14:41:14
+-- Tiempo de generación: 15-03-2023 a las 19:58:22
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT DELAYED IGNORE INTO `roles` (`ID`, `Nombre`) VALUES
+INSERT IGNORE INTO `roles` (`id`, `nombre`) VALUES
 (1, 'admin'),
 (3, 'mod'),
 (2, 'user');
