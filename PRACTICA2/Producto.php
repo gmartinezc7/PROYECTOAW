@@ -72,7 +72,7 @@ class Producto
     
     public static function buscaDisponibles()
     {
-        
+
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("SELECT * FROM Productos WHERE id> %d", 0);
         $rs = $conn->query($query);

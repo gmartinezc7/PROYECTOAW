@@ -1,9 +1,10 @@
 <?php
 
 require '../Producto.php';
+//require 'carrito.php';
 //require ("./comun/pie.php"); 
-/**require_once 'includes/config.php';
-require_once 'includes/vistas/helpers/autorizacion.php'; */
+/*require_once 'includes/config.php';
+require_once 'includes/vistas/helpers/autorizacion.php';*/
 
 $tituloPagina = 'Página de Compras';
 $inicio = true;
@@ -12,7 +13,7 @@ $inicio = true;
 $busquedaFor = buildFormProds();
 $contenidoPrincipal=<<<EOS
     <link rel="stylesheet" type="text/css" href='../css/estilo.css' />
-	<h1>COMPRAR</h1>
+    <h1>COMPRAR</h1>
     $busquedaFor
 EOS;
 
@@ -38,10 +39,10 @@ function buildFormProds(){
         <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>
         <input type="hidden" name="prod" value="<?= htmlentities($prodsSerializado) ?">
         <input type="hidden" name="indice" value="<?php echo $i; ?>">
-        <form action="comprar.php" class="form-container" method="POST">
+        <form action="carrito.php" class="form-container" method="POST">
         <div><button type="submit" name="botonComprar">Comprar</button></div>
         EOS;
-        
+
         ++$i;
     }
 
@@ -50,7 +51,6 @@ function buildFormProds(){
 }
 
    
-
 
 
 require 'comun/lobby.php';

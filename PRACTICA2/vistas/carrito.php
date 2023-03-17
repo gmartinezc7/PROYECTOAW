@@ -1,11 +1,10 @@
 <?php
-require '../Producto.php';
-require 'comprar.php';
 
 $tituloPagina = 'Carrito';
 $inicio = true;
 
-session_start();
+//session_start();
+$codigohtml2 = '';
 
 if(isset($_SESSION['usuario'])){
     $contenidoPrincipal = <<<EOF
@@ -26,9 +25,12 @@ if(isset($_SESSION['usuario'])){
         $contenidoPrincipal .= <<<EOF
         <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>
         EOF;
+		echo "hola prueba de carrito22222s";
     }
 } else {
     $contenidoPrincipal = <<<EOF
     <p> Hace falta estar logeado para observar el carrito </p>
     EOF;
 }
+
+require 'comun/lobby.php';
