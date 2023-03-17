@@ -7,12 +7,11 @@ $tituloPagina = 'Registro';
 $inicio = true;
 
 $form = new FormularioRegistro(""); 
-$form->gestiona();
-$formulario = $form->generaFormulario();
+$htmlFormRegistro = $form->gestiona();
 
 $contenidoPrincipal = <<<EOS
 	<h1>Registro de usuario</h1>
-	$formulario
+	$htmlFormRegistro
 EOS;
 
 require 'comun/lobby.php';
