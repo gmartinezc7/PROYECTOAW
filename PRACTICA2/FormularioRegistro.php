@@ -4,117 +4,121 @@
 	require_once  '../Formulario.php';
 	
 
-	class FormularioRegistro extends Form
-	{
-		private const FORM_ID = 'form-registro';
+//Vemos que hereda de Form
+class FormularioRegistro extends Formulario
+{
+    public function __construct() {
+        parent::__construct('formRegistro');
+    }
+    
+    protected function generaCamposFormulario($datos, $errores = array())
+    {
+        $usuario = $datos['usuario'] ?? '';
+        $nombre = $datos['nombre'] ?? '';
+		$apellidos = $datos['apellidos'] ?? '';
+        $direccion = $datos['direccion'] ?? '';
+		$telefono = $datos['telefono'] ?? '';
+        $email = $datos['email'] ?? '';
 
-		public function __construct(string $action)
-		{
-			parent::__construct(self::FORM_ID, array('action' => $action));
-		}
-		
-		protected function generaCamposFormulario($datosIniciales, $errores = [])
-		{
-			$nombreUsuario = '';
-			$app = Aplicacion::getInstance();
 
-			if (!empty($datosIniciales))
-			{
-				$nombreUsuario = isset($datosIniciales['usuario']) ? $datosIniciales['usuario'] : $nombreUsuario;
-			}
+        // Se generan los mensajes de error si existen.
+        $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+        $errorusuario = self::createMensajeError($errores, 'usuario', 'span', array('class' => 'error'));
+        $errorNombre = self::createMensajeError($errores, 'nombre', 'span', array('class' => 'error'));
+        $errorPassword = self::createMensajeError($errores, 'password', 'span', array('class' => 'error'));
+		$errorApellidos = self::createMensajeError($errores, 'apellidos', 'span', array('class' => 'error'));
+		$errorEmail = self::createMensajeError($errores, 'email', 'span', array('class' => 'error'));
+		$errorTelefono = self::createMensajeError($errores, 'telefono', 'span', array('class' => 'error'));
+		$errorDireccion = self::createMensajeError($errores, 'direccion', 'span', array('class' => 'error'));
 
-			$html = <<< HTML
-                <fieldset>
-                    <legend>Usuario y contraseña</legend>
-                        <div class="grupo-control">
-                        <label>Nombre de usuario:</label> <input type="text" name="usuario"/>
-                        </div>
-                        <div class="grupo-control">
-                        <label>Nombre:</label> <input class="control" type="text" name="nombre"/>
-                        </div>
-                        <div class="grupo-control">
-                        <label>Apellidos:</label> <input class="control" type="text" name="apellidos"/>
-                        </div>
-                        <div class="grupo-control">
-                        <label>email:</label> <input class="control" type="email" name="email"/>
-                        </div>
-                        <div class="grupo-control">
-                        <label>Teléfono:</label> <input class="control" type="tell" name="telefono"/>
-                        </div>
-                        <div class="grupo-control">
-                        <label>Dirección:</label> <input class="control" type="text" name="direccion"/>
-                        </div>
-                        <div class="grupo-control">
-                        <label>Contraseña:</label> <input type="password" name="password"/>
-                        </div>
-                        <div class="grupo-control"><button type="submit" name="registro">Registrar</button></div>
-                </fieldset>
-            HTML;
-
-			return $html;
-		}
-		
-		protected function procesaFormulario($datos): void
-		{
-			$erroresFormulario = array();
-			
-			$nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
-			if ( empty($nombreUsuario) || mb_strlen($nombreUsuario) < 5 ) {
-				$erroresFormulario['nombreUsuario'] = "El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.";
-			}
-			
-			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
-			if ( empty($nombre)) {
-				$erroresFormulario['nombre'] = "Este campo es obligatorio.";
-			}
-			
-            $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : null;
-			if ( empty($apellidos)) {
-				$erroresFormulario['apellidos'] = "Este campo es obligatorio.";
-			}
-
-            $email = isset($_POST['email']) ? $_POST['email'] : null;
-			if ( empty($email)) {
-				$erroresFormulario['email'] = "Este campo es obligatorio.";
-			}
-
-            $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
-			if ( empty($telefono) || mb_strlen($telefono) < 9 ) {
-				$erroresFormulario['telefono'] = "El telefono no tiene el número de digitos correctos.";
-			}
-
-            $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : null;
-			if ( empty($direccion) ) {
-				$erroresFormulario['direccion'] = "Este campo es obligatorio.";
-			}
-
-			$password = isset($_POST['password']) ? $_POST['password'] : null;
-			if ( empty($password) || mb_strlen($password) < 5 ) {
-				$erroresFormulario['password'] = "El password tiene que tener una longitud de al menos 5 caracteres.";
-			}
-			
-			
-			// Si no hay ningún error, continuar.
-			if (empty($error))
-			{
-				$usuario = Usuario::crea($nombreUsuario, $nombre,$apellidos, $email, $password, 'user');
-
-				if (! $usuario ) {
-					$erroresFormulario[] = "El usuario ya existe";
-					$this->generaListaErroresGlobales($erroresFormulario);
-				} else {
-					$_SESSION['login'] = true;
-					$_SESSION['nombre'] = $nombreUsuario;
-					header('Location: index.php');
-					exit();
-				}
-			}
-			else
-			{
-				$this->generaListaErroresGlobales($erroresFormulario);
-			}
-
-			$this->generaFormulario();
-		}
+        $html = <<<EOF
+			<fieldset>
+				$htmlErroresGlobales
+				<div class="grupo-control">
+				<label>Nombre de usuario:</label> <input class="control" type="text" name="usuario" value="$usuario" />$errorusuario
+				</div>
+				<div class="grupo-control">
+				<label>Password:</label> <input class="control" type="password" name="password" />$errorPassword
+				</div>
+				<div class="grupo-control">
+				<label>Nombre completo:</label> <input class="control" type="text" name="nombre" value="$nombre" />$errorNombre
+				</div>
+				<div class="grupo-control">
+				<label>Apellidos:</label> <input class="control" type="text" name="apellidos" value="$apellidos"/>$errorApellidos
+				</div>
+				<div class="grupo-control">
+				<label>email:</label> <input class="control" type="email" name="email" value="$email"/>$errorEmail
+				</div>
+				<div class="grupo-control">
+				<label>Teléfono:</label> <input class="control" type="tell" name="telefono" value="$telefono"/>$errorTelefono
+				</div>
+				<div class="grupo-control">
+				<label>Dirección:</label> <input class="control" type="text" name="direccion" value="$direccion"/>$errorDireccion
+				</div>
+				<div class="grupo-control"><button type="submit" name="registro">Registrar</button></div>
+			</fieldset>
+		EOF;
+		return $html;
 	}
+    
+
+    protected function procesaFormulario($datos)
+    {
+        $result = array();
+        
+        $usuario = $datos['usuario'] ?? null;
+        
+        //Si el nombre de usuario es vacio o con menos de 5 caracteres muestra un mensaje de error
+        if ( empty($usuario) || mb_strlen($usuario) < 5 ) {
+            $result['usuario'] = "El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.";
+        }
+        
+        $nombre = $datos['nombre'] ?? null;
+        //Si el nombre es vacio o con menos de 5 caracteres muestra un mensaje de error
+        if ( empty($nombre) || mb_strlen($nombre) < 5 ) {
+            $result['nombre'] = "El nombre tiene que tener una longitud de al menos 5 caracteres.";
+        }
+        
+        $password = $datos['password'] ?? null;
+        //Si la contraseña es vacio o con menos de 5 caracteres muestra un mensaje de error
+        if ( empty($password) || mb_strlen($password) < 5 ) {
+            $result['password'] = "El password tiene que tener una longitud de al menos 5 caracteres.";
+        }
+
+		$apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : null;
+		if ( empty($apellidos)) {
+			$erroresFormulario['apellidos'] = "Este campo es obligatorio.";
+		}
+
+		$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : null;
+		if ( empty($direccion) ) {
+			$erroresFormulario['direccion'] = "Este campo es obligatorio.";
+		}
+
+		$telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
+		if ( empty($telefono) || mb_strlen($telefono) < 9 ) {
+			$erroresFormulario['telefono'] = "El telefono no tiene el número de digitos correctos.";
+		}
+
+		$email = isset($_POST['email']) ? $_POST['email'] : null;
+		if ( empty($email)) {
+			$erroresFormulario['email'] = "Este campo es obligatorio.";
+		}
+
+        //Vemos si un usuario se ha creado con éxito. 
+        //Si el usuario ya existe, te muestra un mensaje
+        if (count($result) === 0) {
+            $user = Usuario::crea($usuario, $password, $nombre, $apellidos, $direccion, $telefono ,$email, 'user');
+
+            if ( !$user ) {
+                $result[] = "El usuario ya existe";
+            } else {
+			$_SESSION['login'] = true;
+			$_SESSION['nombre'] = $usuario;
+			$result = 'pprincipal.php';
+            }
+        }
+        return $result;
+    }
+}
 ?>

@@ -55,13 +55,13 @@ INSERT IGNORE INTO `rolesusuario` (`usuario`, `rol`) VALUES
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT IGNORE INTO `usuario` (`usuario`, `password`, `nombre`, `apellidos`, `direccion`, `telefono`, `email`) VALUES
-('Alex', 'soyalex', 'Alejandro', 'Nafria', 'Madrid', '222222222', 'alex@gmail.com'),
-('Angela', 'soyangela', 'Angela', 'Lucena', 'Madrid', '333333333', 'angela@gmail.com'),
-('Dani', 'soydani', 'Daniel', 'Ortiz', 'Madrid', '111111111', 'dani@gmail.com'),
-('Elo', 'soyelo', 'Eloisa', 'Rodriguez', 'Madrid', '555555555', 'elo@gmail.com'),
-('Gon', 'soygon', 'Gonzalo', 'Martinez', 'Madrid', '444444444', 'gonzalo@gmail.com'),
-('Jaime', 'soyjaime', 'Jaime', 'Millan', 'Madrid', '666666666', 'jaime@gmail.com');
+INSERT IGNORE INTO `usuario` (`usuario`, `password`, `nombre`, `apellidos`, `direccion`, `telefono`, `email`, `rol`) VALUES
+('Alex', 'soyalex', 'Alejandro', 'Nafria', 'Madrid', '222222222', 'alex@gmail.com', 'user'),
+('Angela', 'soyangela', 'Angela', 'Lucena', 'Madrid', '333333333', 'angela@gmail.com', 'mod'),
+('Dani', 'soydani', 'Daniel', 'Ortiz', 'Madrid', '111111111', 'dani@gmail.com', 'admin'),
+('Elo', 'soyelo', 'Eloisa', 'Rodriguez', 'Madrid', '555555555', 'elo@gmail.com', 'user'),
+('Gon', 'soygon', 'Gonzalo', 'Martinez', 'Madrid', '444444444', 'gonzalo@gmail.com', 'admin'),
+('Jaime', 'soyjaime', 'Jaime', 'Millan', 'Madrid', '666666666', 'jaime@gmail.com', 'mod');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

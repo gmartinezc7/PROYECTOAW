@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
-
-<head>
-  <title>YouShare</title>
-  <link rel="stylesheet" type="text/css" href="style/style.css">
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="images/minilogo.png">
-</head>
-
-<body>
-
 <?php
 
 //Inicio del procesamiento
@@ -28,4 +16,4 @@ $contenidoPrincipal = <<<EOF
 		<h1>Hasta pronto!</h1>
 EOF;
 
-include '/comun/lobby.php';
+require __DIR__.'/comun/lobby.php';
