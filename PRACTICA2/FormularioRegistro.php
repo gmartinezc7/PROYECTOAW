@@ -8,10 +8,10 @@
 class FormularioRegistro extends Formulario
 {
     public function __construct() {
-        parent::__construct('formRegistro');
+        parent::__construct('formRegistro', ['urlRedireccion' =>'pprincipal.php']);
     }
     
-    protected function generaCamposFormulario($datos, $errores = array())
+    protected function generaCamposFormulario(&$datos)
     {
         $usuario = $datos['usuario'] ?? '';
         $nombre = $datos['nombre'] ?? '';
@@ -22,38 +22,39 @@ class FormularioRegistro extends Formulario
 
 
         // Se generan los mensajes de error si existen.
-        $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-        $errorusuario = self::createMensajeError($errores, 'usuario', 'span', array('class' => 'error'));
-        $errorNombre = self::createMensajeError($errores, 'nombre', 'span', array('class' => 'error'));
-        $errorPassword = self::createMensajeError($errores, 'password', 'span', array('class' => 'error'));
-		$errorApellidos = self::createMensajeError($errores, 'apellidos', 'span', array('class' => 'error'));
-		$errorEmail = self::createMensajeError($errores, 'email', 'span', array('class' => 'error'));
-		$errorTelefono = self::createMensajeError($errores, 'telefono', 'span', array('class' => 'error'));
-		$errorDireccion = self::createMensajeError($errores, 'direccion', 'span', array('class' => 'error'));
+        $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
+        $errorusuario = self::createMensajeError($this->errores, 'usuario', 'span', array('class' => 'error'));
+        $errorNombre = self::createMensajeError($this->errores, 'nombre', 'span', array('class' => 'error'));
+        $errorPassword = self::createMensajeError($this->errores, 'password', 'span', array('class' => 'error'));
+		$errorApellidos = self::createMensajeError($this->errores, 'apellidos', 'span', array('class' => 'error'));
+		$errorEmail = self::createMensajeError($this->errores, 'email', 'span', array('class' => 'error'));
+		$errorTelefono = self::createMensajeError($this->errores, 'telefono', 'span', array('class' => 'error'));
+		$errorDireccion = self::createMensajeError($this->errores, 'direccion', 'span', array('class' => 'error'));
+		$erroresCampos =self::generaErroresCampos(['usuario', 'nombre','password','apellidos', 'email', 'telefono','direccion'], $this->errores, 'span', array('class' => 'error'));
 
         $html = <<<EOF
 			<fieldset>
 				$htmlErroresGlobales
 				<div class="grupo-control">
-				<label>Nombre de usuario:</label> <input class="control" type="text" name="usuario" value="$usuario" />$errorusuario
+				<label>Nombre de usuario:</label> <input class="control" type="text" name="usuario" value="$usuario" />{$erroresCampos['usuario']}
 				</div>
 				<div class="grupo-control">
-				<label>Password:</label> <input class="control" type="password" name="password" />$errorPassword
+				<label>Password:</label> <input class="control" type="password" name="password" />{$erroresCampos['password']}
 				</div>
 				<div class="grupo-control">
-				<label>Nombre completo:</label> <input class="control" type="text" name="nombre" value="$nombre" />$errorNombre
+				<label>Nombre completo:</label> <input class="control" type="text" name="nombre" value="$nombre" />{$erroresCampos['nombre']}
 				</div>
 				<div class="grupo-control">
-				<label>Apellidos:</label> <input class="control" type="text" name="apellidos" value="$apellidos"/>$errorApellidos
+				<label>Apellidos:</label> <input class="control" type="text" name="apellidos" value="$apellidos"/>{$erroresCampos['apellidos']}
 				</div>
 				<div class="grupo-control">
-				<label>email:</label> <input class="control" type="email" name="email" value="$email"/>$errorEmail
+				<label>email:</label> <input class="control" type="email" name="email" value="$email"/>{$erroresCampos['email']}
 				</div>
 				<div class="grupo-control">
-				<label>Teléfono:</label> <input class="control" type="tell" name="telefono" value="$telefono"/>$errorTelefono
+				<label>Teléfono:</label> <input class="control" type="tell" name="telefono" value="$telefono"/>{$erroresCampos['telefono']}
 				</div>
 				<div class="grupo-control">
-				<label>Dirección:</label> <input class="control" type="text" name="direccion" value="$direccion"/>$errorDireccion
+				<label>Dirección:</label> <input class="control" type="text" name="direccion" value="$direccion"/>{$erroresCampos['direccion']}
 				</div>
 				<div class="grupo-control"><button type="submit" name="registro">Registrar</button></div>
 			</fieldset>
@@ -62,63 +63,61 @@ class FormularioRegistro extends Formulario
 	}
     
 
-    protected function procesaFormulario($datos)
+    protected function procesaFormulario(&$datos)
     {
-        $result = array();
+        $this->errores = [];
         
         $usuario = $datos['usuario'] ?? null;
         
         //Si el nombre de usuario es vacio o con menos de 5 caracteres muestra un mensaje de error
         if ( empty($usuario) || mb_strlen($usuario) < 5 ) {
-            $result['usuario'] = "El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.";
+			$this->errores['usuario'] = "El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.";
         }
         
         $nombre = $datos['nombre'] ?? null;
         //Si el nombre es vacio o con menos de 5 caracteres muestra un mensaje de error
         if ( empty($nombre) || mb_strlen($nombre) < 5 ) {
-            $result['nombre'] = "El nombre tiene que tener una longitud de al menos 5 caracteres.";
+        	$this->errores['nombre'] = "El nombre tiene que tener una longitud de al menos 5 caracteres.";
         }
         
         $password = $datos['password'] ?? null;
         //Si la contraseña es vacio o con menos de 5 caracteres muestra un mensaje de error
         if ( empty($password) || mb_strlen($password) < 5 ) {
-            $result['password'] = "El password tiene que tener una longitud de al menos 5 caracteres.";
+        	$this->errores['password'] = "El password tiene que tener una longitud de al menos 5 caracteres.";
         }
 
 		$apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : null;
 		if ( empty($apellidos)) {
-			$erroresFormulario['apellidos'] = "Este campo es obligatorio.";
+			$this->errores['apellidos'] = "Este campo es obligatorio.";
 		}
 
 		$direccion = isset($_POST['direccion']) ? $_POST['direccion'] : null;
 		if ( empty($direccion) ) {
-			$erroresFormulario['direccion'] = "Este campo es obligatorio.";
+			$this->errores['direccion'] = "Este campo es obligatorio.";
 		}
 
 		$telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null;
 		if ( empty($telefono) || mb_strlen($telefono) < 9 ) {
-			$erroresFormulario['telefono'] = "El telefono no tiene el número de digitos correctos.";
+			$this->errores['telefono'] = "El telefono no tiene el número de digitos correctos.";
 		}
 
 		$email = isset($_POST['email']) ? $_POST['email'] : null;
 		if ( empty($email)) {
-			$erroresFormulario['email'] = "Este campo es obligatorio.";
+			$this->errores['email'] = "Este campo es obligatorio.";
 		}
 
         //Vemos si un usuario se ha creado con éxito. 
         //Si el usuario ya existe, te muestra un mensaje
-        if (count($result) === 0) {
+        if (count($this->errores) === 0) {
             $user = Usuario::crea($usuario, $password, $nombre, $apellidos, $direccion, $telefono ,$email, 'user');
 
             if ( !$user ) {
-                $result[] = "El usuario ya existe";
+            	$this->errores['usuario'] = "El usuario ya existe";
             } else {
 			$_SESSION['login'] = true;
-			$_SESSION['nombre'] = $usuario;
-			$result = 'pprincipal.php';
+			$_SESSION['nombre'] = $usuario->getNombre();
             }
         }
-        return $result;
     }
 }
 ?>
