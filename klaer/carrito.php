@@ -19,6 +19,7 @@ if(isset($_SESSION['login'])){
 
         $prod_carrito = $productos[$i];
         $nombre = $prod_carrito->getNombreProd();
+        $idProd = $prod_carrito->getId();
         $descripcion = $prod_carrito->getDescripcion();
         $tipo = $prod_carrito->getNombreProd();
         $fecha = $prod_carrito->getFecha();
@@ -29,7 +30,14 @@ if(isset($_SESSION['login'])){
         <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>
         EOF;
 		echo "hola prueba de carrito22222s";
-        /**Transaccion:: */
+        /**Insertar boton de confirmación de compra 
+         * 
+         * if($POST(boton_compra)){
+         * // La cantidad tenemos que cogerla de un boton que hay que meter
+         *  $transaccion = Transaccion::crea(Usuario::buscaUsuario($_SESSION['usuario])->getId(),$idVendedor,¿Admin?,$idProd,$fecha,$canntidad);
+         * 
+         * }
+         */
     }
 } else {
     $contenidoPrincipal = <<<EOF
