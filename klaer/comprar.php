@@ -21,12 +21,12 @@ function buildFormProds(){
 
 
         $codigohtml .= <<<EOS
-<p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>       
-<form action="carrito.php" class="form-container" method="POST">
-<input type="hidden" name="prod" value='$prodsSerializado'>
-<input type="hidden" name="indice" value="$i">
-<div><button type="submit" name="botonComprar">Comprar</button></div>
-</form>
+        <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>       
+        <form action="comprar.php" class="form-container" method="POST">
+        <input type="hidden" name="prod" value='$prodsSerializado'>
+        <input type="hidden" name="indice" value="$i">
+        <div><button type="submit" name="botonComprar">Comprar</button></div>
+        </form>
 EOS;
 
         ++$i;
@@ -48,6 +48,15 @@ if ($app->usuarioLogueado()) {
     <h1>Usuario no registrado!</h1>
     <p>Debes iniciar sesión para ver el contenido.</p>
   EOS;
+
+}
+
+
+
+if (isset($_POST['botonComprar'])){
+  if (isset($_POST[$nombre])){
+    
+  }
 
 }
 
