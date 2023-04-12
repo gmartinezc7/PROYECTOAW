@@ -25,8 +25,8 @@ SET time_zone = "+00:00";
 -- Volcado de datos para la tabla `foro`
 --
 
-INSERT IGNORE INTO `foro` (`id`, `titulo`, `idUsuario`, `mensaje`, `respuestas`, `fecha`) VALUES
-(0, 'FUNDA PARA AURICULARES ESSENTIALS TINY', 11, 'ELEGANTE Y FUNCIONAL\r\nNo te olvides de los auriculares ni de la tarjeta del gimnasio. Es más fácil seguir tu rutina de entrenamiento cuando tienes todo lo que necesitas. Esta pequeña funda adidas cuenta con una correa extraíble que te permite llevarla en el cuello o guardarla en el bolso. Se ha fabricado en piel sintética y luce un logotipo que añade un toque deportivo a tus looks.', 0, '2023-04-11 13:48:01');
+INSERT IGNORE INTO `foro` ( `titulo`, `idUsuario`, `mensaje`, `respuestas`, `fecha`) VALUES
+('FUNDA PARA AURICULARES ESSENTIALS TINY', 2, 'ELEGANTE Y FUNCIONAL\r\nNo te olvides de los auriculares ni de la tarjeta del gimnasio. Es más fácil seguir tu rutina de entrenamiento cuando tienes todo lo que necesitas. Esta pequeña funda adidas cuenta con una correa extraíble que te permite llevarla en el cuello o guardarla en el bolso. Se ha fabricado en piel sintética y luce un logotipo que añade un toque deportivo a tus looks.', 0, '2023-04-11 13:48:01');
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -41,8 +41,8 @@ INSERT IGNORE INTO `productos` (`id`, `precio`, `nombre`, `descripcion`, `tipo`,
 -- Volcado de datos para la tabla `respuestas`
 --
 
-INSERT IGNORE INTO `respuestas` (`id`, `idUsuario`, `texto`, `fecha`, `idPub`) VALUES
-(0, 10, 'Me encanta!', '2023-04-11 16:21:41', 0);
+INSERT IGNORE INTO `respuestas` (`idUsuario`, `texto`, `fecha`, `idPub`) VALUES
+(1, 'Me encanta!', '2023-04-11 16:21:41', 0);
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -50,25 +50,27 @@ INSERT IGNORE INTO `respuestas` (`id`, `idUsuario`, `texto`, `fecha`, `idPub`) V
 
 INSERT IGNORE INTO `roles` (`id`, `nombre`) VALUES
 (1, 'admin'),
-(2, 'user'),
-(3, 'mod');
+(3, 'mod'),
+(2, 'user');
 
 --
 -- Volcado de datos para la tabla `rolesusuario`
 --
 
 INSERT IGNORE INTO `rolesusuario` (`usuario`, `rol`) VALUES
-(13, 2);
-
+(1, 2),
+(2, 3),
+(3, 1);
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT IGNORE INTO `usuario` (`id`, `usuario`, `password`, `nombre`, `apellidos`, `direccion`, `telefono`, `email`) VALUES
-(10, 'Alejandro', '$2y$10$r0l23e6wAcaF8L7gI3PhmuJZ0pjZdzsohBwfj049oM3NarX2J5JFq', 'Alejandro', 'Nafria', 'Madrid', '222222222', 'alex@gmail.com'),
-(11, 'Angela', '$2y$10$cl3h4MhOVtPS9qK.LcZE7OiBlh1OGPMr1E497/VCcI1AsUUIaYNXW', 'Angela', 'Lucena', 'Madrid', '333333333', 'angela@gmail.com'),
-(12, 'Dani', '$2y$10$2b/msAvjbYEe1Vm3pFQHee4vTwK7sI7zXpxdykg0IhmdFkGEVaUJK', 'Daniel', 'Ortiz', 'Madrid', '111111111', 'dani@gmail.com'),
-(13, 'Prueba', '$2y$10$E454UZ1nZXceJNM6fR5vC.Ghxjh82Z9Oe8c2s388bhzalt/K3xyWK', 'Prueba', 'prueba', 'Madrid', '121212121', 'prueba@gmail.com');
+-- Las contraseñas para cada usuario son: soyalex, soyangela, soydani
+
+INSERT IGNORE INTO `usuario` (`usuario`, `password`, `nombre`, `apellidos`, `direccion`, `telefono`, `email`) VALUES
+('Alejandro', '$2y$10$r0l23e6wAcaF8L7gI3PhmuJZ0pjZdzsohBwfj049oM3NarX2J5JFq', 'Alejandro', 'Nafria', 'Madrid', '222222222', 'alex@gmail.com'),
+('Angela', '$2y$10$cl3h4MhOVtPS9qK.LcZE7OiBlh1OGPMr1E497/VCcI1AsUUIaYNXW', 'Angela', 'Lucena', 'Madrid', '333333333', 'angela@gmail.com'),
+('Dani', '$2y$10$2b/msAvjbYEe1Vm3pFQHee4vTwK7sI7zXpxdykg0IhmdFkGEVaUJK', 'Daniel', 'Ortiz', 'Madrid', '111111111', 'dani@gmail.com');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

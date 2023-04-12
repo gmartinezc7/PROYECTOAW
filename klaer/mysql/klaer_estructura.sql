@@ -87,6 +87,25 @@ CREATE TABLE `productos` (
 
 -- --------------------------------------------------------
 
+
+--
+-- Estructura de tabla para la tabla `carrito`
+--
+
+DROP TABLE IF EXISTS `carrito`;
+CREATE TABLE `carrito` (
+  `id` int(11) NOT NULL,
+  `precio` decimal(10,0) NOT NULL,
+  `nombre` varchar(15) NOT NULL,
+  `descripcion` varchar(2000) NOT NULL,
+  `tipo` varchar(15) NOT NULL,
+  `fecha` date NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `respuestas`
 --
@@ -196,6 +215,16 @@ ALTER TABLE `productos`
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
+-- Indices de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `precio` (`precio`),
+  ADD KEY `nombre` (`nombre`),
+  ADD KEY `tipo` (`tipo`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
 -- Indices de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
@@ -259,6 +288,12 @@ ALTER TABLE `mensaje`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `carrito`
+--
+ALTER TABLE `carrito`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

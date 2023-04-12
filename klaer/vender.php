@@ -6,10 +6,10 @@ use es\klaer\Producto;
 $tituloPagina = 'PáginaVentas';
 $html = '';
 
-
-$contenidoPrincipal = <<<EOS
-<link rel="stylesheet" type="text/css" href='../../../css/estilo.css' />
-<h1>VENDER</h1>
+if ($app->usuarioLogueado()){
+    $contenidoPrincipal = <<<EOS
+    <link rel="stylesheet" type="text/css" href='../../../css/estilo.css' />
+    <h1>VENDER</h1>
 
     <form action="vender.php" class="form-container" method="POST">
 
@@ -30,6 +30,14 @@ $contenidoPrincipal = <<<EOS
     </form>
 
 EOS;
+
+}else{
+    $contenidoPrincipal=<<<EOS
+    <h1>Usuario no registrado!</h1>
+    <p>Debes iniciar sesión para añadir nuevos productos.</p>
+  EOS;
+
+}
 
 // Procesamiento del formulario 
 
