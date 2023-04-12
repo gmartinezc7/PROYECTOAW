@@ -8,9 +8,11 @@ class CarritoObj
 {
 
     
-    public static function crea($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad)
+    public static function crea($id, $precio, $nombre, $idUsuario)
     {
-        $carritobj = new CarritoObj($nombre, $precio, $descripcion, $tipo, $fecha, $cantidad);
+        $carritobj = new CarritoObj($id, $precio, $nombre, $idUsuario);
+        //echo "SE HA CREADO EL OBJETO CORRECTAMENTE";
+        //echo "id: $id | price: $precio | nombre: $nombre | idUser: $idUsuario";
         return $carritobj->guarda();
     }
     
@@ -19,13 +21,11 @@ class CarritoObj
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO Carrito(nombre,precio,descripcion,tipo,fecha,cantidad) VALUES ('%s', '%d', '%s', '%s','%s','%d')"
-            , $conn->real_escape_string($carritobj->nombreProd)
+        $query=sprintf("INSERT INTO Carrito(id,precio,nombre,idUsuario) VALUES ('%d', '%d', '%s', '%d')"
+            , $conn->real_escape_string($carritobj->id)
             , $conn->real_escape_string($carritobj->precio)
-            , $conn->real_escape_string($carritobj->descripcion)
-            , $conn->real_escape_string($carritobj->tipo)
-            , $conn->real_escape_string($carritobj->fecha)
-            , $conn->real_escape_string($carritobj->stock)
+            , $conn->real_escape_string($carritobj->nombreProd)
+            , $conn->real_escape_string($carritobj->iduser)
         );
         if ( $conn->query($query) ) {
             $carritobj->id = $conn->insert_id;
@@ -41,13 +41,11 @@ class CarritoObj
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Carrito C SET nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d' WHERE P.id=%d"   
-            , $conn->real_escape_string($carritobj->nombreProd)
+        $query=sprintf("UPDATE Carrito C SET id='%d', precio= '%d, nombre='%s', idUsuario= '%d' WHERE P.id=%d"   
+            , $conn->real_escape_string($carritobj->id)
             , $conn->real_escape_string($carritobj->precio)
-            , $conn->real_escape_string($carritobj->descripcion)
-            , $conn->real_escape_string($carritobj->tipo)
-            , $conn->real_escape_string($carritobj->fecha)
-            , $conn->real_escape_string($carritobj->stock)
+            , $conn->real_escape_string($carritobj->nombreProd)
+            , $conn->real_escape_string($carritobj->iduser)
             , $carritobj->id
         );
         
@@ -80,27 +78,18 @@ class CarritoObj
 
     private $id;
 
-    private $nombreProd;
-
     private $precio;
 
-    private $descripcion;
+    private $nombreProd;    
 
-    private $tipo;
+    private $iduser;
 
-    private $fecha;
-
-    private $stock;
-
-    private function __construct($nombreProd, $precio, $descripcion, $tipo, $fecha, $stock, $id = null)
+    private function __construct($id = null, $precio, $nombreProd, $iduser)
     {
         $this->id = $id;
-        $this->nombreProd = $nombreProd;
         $this->precio = $precio;
-        $this->descripcion = $descripcion;
-        $this->tipo = $tipo;
-        $this->fecha = $fecha;
-        $this->stock = $stock;
+        $this->nombreProd = $nombreProd;
+        $this->iduser = $iduser;
     }
 
     public function getId()
@@ -108,52 +97,13 @@ class CarritoObj
         return $this->id;
     }
 
-    public function getNombreProd()
+    public function getNombreProdCarr()
     {
         return $this->nombreProd;
     }
 
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    public function getFecha()
-    {
-        return $this->fecha;
-    }
-
-    public function getStock()
-    {
-        return $this->stock;
-    }
-
-
-    public function añadeStock($stock,$idProd)
-    {
-        $this->stock = $this->stock + $stock;
-        self::actualiza($idProd);
-    }
-
-    
-    public function tieneStock()
-    {
-        return $this->stock > 0;
-    }
-
-    public function reduceStock($stock, $idProd)
-    {
-        if ($stock <= $this->stock){
-            $this->stock = $this->stock - $stock;
-        } else {
-            $this->stock = 0; // Mensaje de error?
-        }
-        self::actualiza($idProd);
+    public function getPriceProdCarr(){
+        return $this->precio;
     }
 
     public function guarda()

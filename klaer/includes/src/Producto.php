@@ -202,6 +202,10 @@ class Producto
         return $this->tipo;
     }
 
+    public function getPrice(){
+        return $this->precio;
+    }
+
     public function getFecha()
     {
         return $this->fecha;
@@ -210,6 +214,10 @@ class Producto
     public function getStock()
     {
         return $this->stock;
+    }
+
+    public function getIdUser(){
+        return 1;
     }
 
 
