@@ -6,18 +6,11 @@ require_once __DIR__.'/includes/config.php';
 
 
 $tituloPagina = 'Carrito';
-$formCarrito = new \es\klaer\FormularioCarrito();
-$formCarrito = $formCarrito->gestiona();
 
 //session_start();
 $codigohtml2 = '';
 
 if(isset($_SESSION['login'])){
-    $contenidoPrincipal=<<<EOF
-        <h1>Carrito</h1>
-        $formCarrito
-    EOF;
-    /*
     $contenidoPrincipal = <<<EOF
     <p> Productos añadido(s) al carrito </p>
     EOF;
@@ -37,7 +30,7 @@ if(isset($_SESSION['login'])){
         <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>
         EOF;
 		echo "hola prueba de carrito22222s";
-    }*/
+    }
 } else {
     $contenidoPrincipal = <<<EOF
     <p> Hace falta estar logeado para observar el carrito </p>
