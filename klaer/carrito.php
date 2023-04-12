@@ -23,11 +23,13 @@ if(isset($_SESSION['login'])){
         $tipo = $prod_carrito->getNombreProd();
         $fecha = $prod_carrito->getFecha();
         $stock = $prod_carrito->getStock();
+        $idVendedor = $prod_carrito->getIdUsuario();
 
         $contenidoPrincipal .= <<<EOF
         <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>
         EOF;
 		echo "hola prueba de carrito22222s";
+        /**Transaccion:: */
     }
 } else {
     $contenidoPrincipal = <<<EOF

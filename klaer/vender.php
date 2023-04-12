@@ -5,8 +5,8 @@ require __DIR__.'/../../src/Producto.php';
 $tituloPagina = 'PáginaVentas';
 $html = '';
 
-
-$contenidoPrincipal = <<<EOS
+isset($app->usuarioLogueado()){
+    $contenidoPrincipal = <<<EOS
 <link rel="stylesheet" type="text/css" href='../../../css/estilo.css' />
 <h1>VENDER</h1>
 
@@ -29,6 +29,12 @@ $contenidoPrincipal = <<<EOS
     </form>
 
 EOS;
+} else {
+    $contenidoPrincipal = <<<EOS 
+    <p> Tienes que estar logeado para poder registrar un producto </p> 
+    EOS; 
+}
+
 
 // Procesamiento del formulario 
 

@@ -79,7 +79,8 @@ CREATE TABLE `productos` (
   `descripcion` varchar(2000) NOT NULL,
   `tipo` varchar(15) NOT NULL,
   `fecha` date NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
