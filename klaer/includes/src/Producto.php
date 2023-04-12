@@ -4,6 +4,7 @@ namespace es\klaer;
 
 use es\klaer\Aplicacion;
 
+
 class Producto
 {
 
@@ -23,7 +24,7 @@ class Producto
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id'],$fila['idUsuario']);
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
             }
             $rs->free();
         } else {
@@ -41,7 +42,7 @@ class Producto
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id'],$fila['idUsuario']);
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
             }
             $rs->free();
         } else {
@@ -60,7 +61,7 @@ class Producto
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id'],$fila['idUsuario']);
+                $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
                 $productos[] = $result;
             }
             $rs->free();
@@ -81,7 +82,7 @@ class Producto
         if ($rs) {
            while ($fila = $rs->fetch_assoc()){
                 if ($fila) {
-                    $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id'],$fila['idUsuario']);
+                    $result = new Producto($fila['nombre'], $fila['precio'], $fila['descripcion'] , $fila['tipo'], $fila['fecha'], $fila['cantidad'], $fila['id']);
                     $disponibles[] = $result;
                 }
            }
@@ -97,14 +98,13 @@ class Producto
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO Productos(nombre,precio,descripcion,tipo,fecha,cantidad,idUsuario) VALUES ('%s', '%d', '%s', '%s','%s','%d','%d')"
+        $query=sprintf("INSERT INTO Productos(nombre,precio,descripcion,tipo,fecha,cantidad) VALUES ('%s', '%d', '%s', '%s','%s','%d')"
             , $conn->real_escape_string($producto->nombreProd)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
             , $conn->real_escape_string($producto->tipo)
             , $conn->real_escape_string($producto->fecha)
             , $conn->real_escape_string($producto->stock)
-            , $conn->real_escape_string($producto->idUsuario)
         );
         if ( $conn->query($query) ) {
             $producto->id = $conn->insert_id;
@@ -120,14 +120,13 @@ class Producto
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Productos P SET nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d',idUsuario='%d' WHERE P.id=%d"   
+        $query=sprintf("UPDATE Productos P SET nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d' WHERE P.id=%d"   
             , $conn->real_escape_string($producto->nombreProd)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
             , $conn->real_escape_string($producto->tipo)
             , $conn->real_escape_string($producto->fecha)
             , $conn->real_escape_string($producto->stock)
-            , $conn->real_escape_string($producto->idUsuario)
             , $producto->id
         );
         
@@ -172,8 +171,6 @@ class Producto
 
     private $stock;
 
-    private $idUsuario;
-
     private function __construct($nombreProd, $precio, $descripcion, $tipo, $fecha, $stock, $id = null)
     {
         $this->id = $id;
@@ -183,7 +180,6 @@ class Producto
         $this->tipo = $tipo;
         $this->fecha = $fecha;
         $this->stock = $stock;
-        $this->idUsuario = Usuario::buscaUsuario($_SESSION['usuario'])->getId();
     }
 
     public function getId()
@@ -216,13 +212,8 @@ class Producto
         return $this->stock;
     }
 
-    public function getIdUsuario()
-    {
-        return $this->idUsuario;
-    }
 
-
-    public function aÃ±adeStock($stock,$idProd)
+    public function añadeStock($stock,$idProd)
     {
         $this->stock = $this->stock + $stock;
         self::actualiza($idProd);
