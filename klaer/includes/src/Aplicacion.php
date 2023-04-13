@@ -4,6 +4,7 @@ namespace es\klaer;
 
 use Exception;
 use es\klaer\usuarios\Usuario;
+use es\klaer\CarritoObj;
 
 /**
  * Clase que mantiene el estado global de la aplicación.
@@ -257,6 +258,11 @@ class Aplicacion
     public function logout()
     {
         $this->compruebaInstanciaInicializada();
+
+        //AQUI FALTA VACIAR LA BASE DE DATOS CARRITO
+
+        CarritoObj::elimina();
+
         //Doble seguridad: unset + destroy
         unset($_SESSION['login']);
         unset($_SESSION['nombre']);
@@ -267,6 +273,8 @@ class Aplicacion
         session_destroy();
         session_start();
     }
+
+   
 
     public function usuarioLogueado()
     {

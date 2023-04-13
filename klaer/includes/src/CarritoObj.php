@@ -86,8 +86,7 @@ class CarritoObj
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("DROP TABLE Carrito"
-        );
+        $query=sprintf("TRUNCATE TABLE Carrito");
         
         if ( $conn->query($query) ){
             $result = true;
