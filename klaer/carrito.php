@@ -78,6 +78,7 @@ function buildFromCarrito(){
 
         // Vaciar carrito
         CarritoObj::elimina();
+        $precioTotal = 0;
 
         $codigohtml = <<<EOS
         <p> Compra completada correctamente! </p>
