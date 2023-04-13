@@ -177,7 +177,7 @@ class CarritoObj
         return self::inserta($this);
     }
 
-    public function elimina()
+    public static function elimina()
     {
         return self::borraCarrito();
     }

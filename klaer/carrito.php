@@ -4,6 +4,8 @@
 
 require_once __DIR__.'/includes/config.php';
 use es\klaer\CarritoObj;
+use es\klaer\usuarios\Usuario;
+use es\klaer\Transaccion;
 
 $tituloPagina = 'Carrito';
 $contenidoPrincipal = '';
@@ -70,19 +72,30 @@ function buildFromCarrito(){
         }
     } else if (isset($_POST['confirmar'])){
         //  
-        // Crear transaccion para cada producto 
-       // $transaccion = Transaccion::ç
+        // Crear transaccion para cada producto
 
+        $usuario = $_SESSION['nombre'];
+        $idComprador = Usuario::buscaUsuario($usuario)->getId();
 
+        foreach ($busquedaCarrito as $objcarrito){
+            $idObj = $objcarrito->getIdObj();
+            $precio = $objcarrito->getPrecio();
+            $cantidad = $objcarrito->getCantidad();
+            $nombreProd = $objcarrito->getNombreProd();
+            $idVendedor = $objcarrito->getIdUser();
+            $fecha = date('Y-m-d');
 
+            //Esto crea la transacción por cada elemento del carrito
+            $transaccion = Transaccion::crea($idComprador,$idVendedor,1,$idObj,$fecha,$cantidad);    
+            
+        }
 
         // Vaciar carrito
         CarritoObj::elimina();
-        $precioTotal = 0;
-
         $codigohtml = <<<EOS
-        <p> Compra completada correctamente! </p>
+        <p> COMPRA REALIZADA CORRECTAMENTE </p>
         EOS;
+        $precioTotal = 0;
 
     }
 

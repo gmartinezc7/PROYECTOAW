@@ -39,6 +39,7 @@ function buildFormProds(){
 
        
     }
+    
     if (isset($_POST['botonComprar'])){
       $prod_sel = $busquedaProductos[$_POST['indice']];
       $id = $prod_sel->getId();

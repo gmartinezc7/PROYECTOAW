@@ -1,5 +1,7 @@
 <?php
 
+namespace es\klaer;
+
 use es\klaer\Aplicacion;
 use es\klaer\Producto;
 
@@ -92,7 +94,7 @@ class Transaccion
 
         if ($obj->tieneStock()) {
             $conn = Aplicacion::getInstance()->getConexionBd();
-            $query=sprintf("INSERT INTO Transaccion(idComprador, idVendedor, admin, idProd, fecha, cantidad) VALUES ('%s', '%s', '%s', '%s', '%s','%d')"
+            $query=sprintf("INSERT INTO Transaccion(idComprador, idVendedor, admin, idProducto, fecha, cantidad) VALUES ('%s', '%s', '%s', '%s', '%s','%d')"
                 , $conn->real_escape_string($transaccion->idComprador)
                 , $conn->real_escape_string($transaccion->idVendedor)
                 , $conn->real_escape_string($transaccion->admin)
@@ -100,11 +102,12 @@ class Transaccion
                 , $conn->real_escape_string($transaccion->fecha)
                 , $conn->real_escape_string($transaccion->cantidad)
             );
-            $obj->reduceStock($transaccion->cantidad,$transaccion->idProd);
-            $result = true;
+            $obj->reduceStock($transaccion->cantidad,$obj);
+            
 
             if ( $conn->query($query) ) {
                 $transaccion->idTransaccion = $conn->insert_id;
+                $result = true;
             } else {
                 error_log("Error BD ({$conn->errno}): {$conn->error}");
             }
@@ -120,7 +123,7 @@ class Transaccion
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Transaccion T SET idComprador = '%s', idVendedor='%s', admin='%s',idProd='%s',fecha='%s',cantidad='%d' WHERE T.id=%d"
+        $query=sprintf("UPDATE Transaccion T SET idComprador = '%s', idVendedor='%s', admin='%s',idProducto='%s',fecha='%s',cantidad='%d' WHERE T.id=%d"
             , $conn->real_escape_string($transaccion->idComprador)
             , $conn->real_escape_string($transaccion->idVendedor)
             , $conn->real_escape_string($transaccion->admin)

@@ -121,7 +121,7 @@ class Producto
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Productos P SET nombre='%s', precio= '%d, descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d',idUsuario='%d' WHERE P.id=%d"   
+        $query=sprintf("UPDATE Productos P SET nombre='%s', precio= '%d', descripcion='%s', tipo= '%s', fecha= '%s',cantidad= '%d',idUsuario='%d' WHERE P.id=%d"   
             , $conn->real_escape_string($producto->nombreProd)
             , $conn->real_escape_string($producto->precio)
             , $conn->real_escape_string($producto->descripcion)
@@ -245,14 +245,14 @@ class Producto
         return $this->stock > 0;
     }
 
-    public function reduceStock($stock, $idProd)
+    public function reduceStock($stock, $prod)
     {
         if ($stock <= $this->stock){
             $this->stock = $this->stock - $stock;
         } else {
             $this->stock = 0; // Mensaje de error?
         }
-        self::actualiza($idProd);
+        self::actualiza($prod);
     }
 
     public function guarda()
