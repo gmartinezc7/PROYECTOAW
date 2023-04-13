@@ -1,9 +1,8 @@
 <?php
 require_once __DIR__.'/includes/config.php';
 
-
-use es\klaer\Producto;
 use es\klaer\CarritoObj;
+use es\klaer\Producto;
 
 $tituloPagina = 'Página de Compras';
 $contenidoPrincipal='';
@@ -32,7 +31,7 @@ function buildFormProds(){
         <input type="hidden" name="prod" value='$prodsSerializado'>
         <input type="hidden" name="indice" value="$i">
         <input type='number' name='cantidad' min='1' max="$stock" value='1'>
-        <div><button type="submit" name="botonComprar" <?php echo "disabled" ?> Comprar</button></div>
+        <div><button type="submit" name="botonComprar"> Comprar</button></div>
         </form>
     EOS;
      
@@ -52,6 +51,7 @@ function buildFormProds(){
     return $codigohtml;
 
 }
+
 
 if ($app->usuarioLogueado()) {
 	$busquedaFor = buildFormProds();

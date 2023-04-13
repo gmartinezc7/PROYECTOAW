@@ -86,7 +86,8 @@ class CarritoObj
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("TRUNCATE TABLE Carrito");
+        $query=sprintf("TRUNCATE TABLE Carrito"
+        );
         
         if ( $conn->query($query) ){
             $result = true;
@@ -98,9 +99,9 @@ class CarritoObj
     }
    
     
-    private static function borra($carritobj)
+    private static function borra($idProd)
     {
-        return self::borraPorId($carritobj->idObj);
+        return self::borraPorId($idProd);
     }
     
     private static function borraPorId($id)
@@ -110,9 +111,7 @@ class CarritoObj
         }
        
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM Carrito C WHERE C.idObj = %d"
-            , $id
-        );
+        $query = sprintf("DELETE FROM Carrito WHERE idObj = %d", $id);
         if ( ! $conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -183,10 +182,10 @@ class CarritoObj
         return self::borraCarrito();
     }
     
-    public function borrate()
+    public static function borrate($idProd)
     {
-        if ($this->id !== null) {
-            return self::borra($this);
+        if ($idProd !== null) {
+            return self::borra($idProd);
         }
         return false;
     }
