@@ -94,10 +94,12 @@ CREATE TABLE `productos` (
 
 DROP TABLE IF EXISTS `carrito`;
 CREATE TABLE `carrito` (
-  `id` int(11) NOT NULL,
+  `idObj` int(11) NOT NULL,
   `precio` decimal(10,0) NOT NULL,
   `nombre` varchar(15) NOT NULL,
-  `idUsuario` int(11) NOT NULL
+  `idUsuario` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -217,7 +219,9 @@ ALTER TABLE `carrito`
   ADD PRIMARY KEY (`id`),
   ADD KEY `precio` (`precio`),
   ADD KEY `nombre` (`nombre`),
-  ADD KEY `idUsuario` (`idUsuario`);
+  ADD KEY `idUsuario` (`idUsuario`),
+  ADD KEY `cantidad` (`cantidad`),
+  ADD KEY `idObj` (`idObj`);
 
 --
 -- Indices de la tabla `respuestas`

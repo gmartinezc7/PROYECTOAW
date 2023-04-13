@@ -3,35 +3,57 @@
 //require_once __DIR__ . '/comprar.php';
 
 require_once __DIR__.'/includes/config.php';
-
+use es\klaer\CarritoObj;
 
 $tituloPagina = 'Carrito';
+$contenidoPrincipal = '';
 
-//session_start();
-$codigohtml2 = '';
 
-if(isset($_SESSION['login'])){
-    $contenidoPrincipal = <<<EOF
-    <p> Productos añadido(s) al carrito </p>
-    EOF;
+function buildFromCarrito(){
+    $codigohtml='';
+    $busquedaCarrito = CarritoObj::buscaDisponibles();
+    $objCarritoSerial = base64_encode(serialize($busquedaCarrito));
+    $i=0;
 
-    if(isset($_POST['botonComprar'])){
-        $i = $_POST['indice'];
-        $productos = unserialize(base64_decode($_POST['prod']));
+    $precioTotal = 0;
 
-        $prod_carrito = $productos[$i];
-        $nombre = $prod_carrito->getNombreProd();
-        $descripcion = $prod_carrito->getDescripcion();
-        $tipo = $prod_carrito->getNombreProd();
-        $fecha = $prod_carrito->getFecha();
-        $stock = $prod_carrito->getStock();
+    foreach ($busquedaCarrito as $objcarrito){
+        $idObj = $objcarrito->getIdObj();
+        $precio = $objcarrito->getPrecio();
+        $cantidad = $objcarrito->getCantidad();
+        $nombreProd = $objcarrito->getNombreProd();
+        $idUser = $objcarrito->getIdUser();
 
-        $contenidoPrincipal .= <<<EOF
-        <p> Nombre: $nombre Descripcion: $descripcion Categoría: $tipo Fecha: $fecha Cantidad disponible: $stock </p>
-        EOF;
-		echo "hola prueba de carrito22222s";
+        $aux = $precio * $cantidad;
+        $codigohtml .= <<<EOS
+        <p> Nombre: $nombreProd Cantidad: $cantidad Precio: $aux </p>
+        EOS;
+
+        $precioTotal += $aux;
+
     }
-} else {
+
+    $codigohtml .= <<<EOS
+        <p> Precio total: $precioTotal </p>
+        EOS;
+
+    return $codigohtml;
+}
+
+
+
+
+
+
+
+if ($app->usuarioLogueado()){
+    $elemsCarrito = buildFromCarrito();
+    $contenidoPrincipal = <<<EOS
+    <h1>CARRITO</h1>
+    $elemsCarrito
+    EOS;
+
+}else{
     $contenidoPrincipal = <<<EOF
     <p> Hace falta estar logeado para observar el carrito </p>
     EOF;

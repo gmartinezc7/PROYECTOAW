@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__.'/includes/config.php';
 
-use es\klaer\CarritoObj;
+
 use es\klaer\Producto;
+use es\klaer\CarritoObj;
 
 $tituloPagina = 'Página de Compras';
 $contenidoPrincipal='';
-
 
 
 
@@ -22,8 +22,8 @@ function buildFormProds(){
         $tipo = $producto->getNombreProd();
         $fecha = $producto->getFecha();
         $stock = $producto->getStock();
-        $price = $producto->getPrice();
-        $idUser = $producto->getIdUser();
+        $price = $producto->getPrecio();
+        $idUser = $producto->getIdUsuario();
 
 
         $codigohtml .= <<<EOS
@@ -31,21 +31,24 @@ function buildFormProds(){
         <form action="comprar.php" class="form-container" method="POST">
         <input type="hidden" name="prod" value='$prodsSerializado'>
         <input type="hidden" name="indice" value="$i">
-        <div><button type="submit" name="botonComprar" onClick="disabled" >Comprar</button></div>
+        <input type='number' name='cantidad' min='1' max="$stock" value='1'>
+        <div><button type="submit" name="botonComprar" <?php echo "disabled" ?> Comprar</button></div>
         </form>
-EOS;
-
+    EOS;
+     
         ++$i;
 
-        if (isset($_POST['botonComprar'])){
-          
-          //echo "id: $id | price: $price | nombre: $nombre | idUser: $idUser";
-          $objetoCarrito = CarritoObj::crea($id,$price,$nombre,$idUser);
-          echo "HOLA HA LLEGADO AQUI";
-        
-        }
+       
     }
-
+    if (isset($_POST['botonComprar'])){
+      $prod_sel = $busquedaProductos[$_POST['indice']];
+      $id = $prod_sel->getId();
+      $precio = $prod_sel->getPrecio();
+      $nombre = $prod_sel->getNombreProd();
+      $idUser = $prod_sel->getIdUsuario();
+      $cantidad = $_POST['cantidad'];
+      $objetoCarrito = CarritoObj::crea($id,$precio,$nombre,$idUser,$cantidad);
+    }
     return $codigohtml;
 
 }
