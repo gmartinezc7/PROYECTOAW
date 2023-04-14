@@ -34,7 +34,7 @@ class Respuesta {
 
     private static function inserta($res){
         $conn=Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO respuestas(idUsuario, texto, fecha, idPub) VALUES ('%s', '%d', '%s', '%d')"
+        $query=sprintf("INSERT INTO respuestas(idUsuario, texto, fecha, idPub) VALUES ('%d', '%s', '%s', '%d')"
         ,$conn->real_escape_string($res->usuario)
         ,$conn->real_escape_string($res->texto)
         ,$conn->real_escape_string($res->fecha)
@@ -48,11 +48,8 @@ class Respuesta {
         return $res;
     }
 
-    //NO SE SI TENEMOS TABLA RESPUESTA PARA ACTUALIZAR
     public static function actualiza($res){
         $result = false;
-        //$app = Aplicacion::getInstancia();
-        //$conn = $app->conexionBd();
         $conn=Aplicacion::getInstance()->getConexionBd();
 
         $query=sprintf("UPDATE respuestas U SET id = '%d', idUsuario='%d', texto='%s', fecha='%s', idPub='%d' WHERE U.id=%d"
@@ -76,10 +73,7 @@ class Respuesta {
         return $result;
     }
 
-    //NO SE SI TENEMOS TABLA RESPUESTA PARA BUSCAR
     public static function buscaRespuesta($id){
-        //$app=Aplicacion::getInstancia();
-        //$conn=$app->conexionBD();
         $conn=Aplicacion::getInstance()->getConexionBd();
 
         $query=sprintf("SELECT * FROM respuestas WHERE id='%d'"

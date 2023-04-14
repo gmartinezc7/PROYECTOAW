@@ -36,12 +36,12 @@ class Publicacion {
 
     private static function inserta($pub){
         $conn=Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO foro(titulo, idUsuario, mensaje, respuestas, fecha) VALUES ('%s', '%d', '%s', '%d', '%d')"
-        ,$conn->real_escape_string($tema->titulo)
-        ,$conn->real_escape_string($tema->userid)
-        ,$conn->real_escape_string($tema->mensaje)
-        ,$conn->real_escape_string($tema->respuestas)
-        ,$conn->real_escape_string($tema->fecha));
+        $query=sprintf("INSERT INTO foro(titulo, idUsuario, mensaje, respuestas, fecha) VALUES ('%s', '%d', '%s', '%d', '%s')"
+        ,$conn->real_escape_string($pub->titulo)
+        ,$conn->real_escape_string($pub->idUsuario)
+        ,$conn->real_escape_string($pub->mensaje)
+        ,$conn->real_escape_string($pub->respuestas)
+        ,$conn->real_escape_string($pub->fecha));
         if ( $conn->query($query) ) {
             $pub->id = $conn->insert_id;
         } else {
@@ -56,11 +56,11 @@ class Publicacion {
         $conn=Aplicacion::getInstance()->getConexionBd();
         $query=sprintf("UPDATE foro U SET id = '%d', titulo='%s', idUsuario='%d', mensaje='%s', respuestas='%d', fecha='%s' WHERE U.id=%d"
             , $conn->real_escape_string($pub->id)
-            , $conn->real_escape_string($tema->titulo)
-            , $conn->real_escape_string($tema->userid)
-            , $conn->real_escape_string($tema->mensaje)
-            , $conn->real_escape_string($tema->respuestas)
-            , $conn->real_escape_string($tema->fecha)
+            , $conn->real_escape_string($pub->titulo)
+            , $conn->real_escape_string($pub->userid)
+            , $conn->real_escape_string($pub->mensaje)
+            , $conn->real_escape_string($pub->respuestas)
+            , $conn->real_escape_string($pub->fecha)
             , $pub->id);
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
@@ -106,7 +106,7 @@ class Publicacion {
         return $result;
     }
 
-    public static function borrarTema($id){
+    public static function borrarPub($id){
         $pub=self::buscaPub($id);
         $result=false;
         if(!$pub){
@@ -141,8 +141,9 @@ class Publicacion {
             , $conn->real_escape_string($id));
     
             if ($conn->query($query) === TRUE){
-                
-                    echo" <p>Respuesta guardada con éxito </p>";
+                    $app = Aplicacion::getInstance();                
+                    $mensajes = ['Cambios guardados con éxito!'];
+                    $app->putAtributoPeticion('mensajes', $mensajes);
             } else {
                     echo"Error en : " . $query . "<br>" . $conn->error;
                     exit();

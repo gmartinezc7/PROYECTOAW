@@ -1,26 +1,29 @@
 <?php
 require __DIR__.'/includes/config.php';
-require __DIR__. '/includes/src/Publicacion.php';
-require __DIR__. '/includes/src/Respuesta.php';
 
-//$conn = $app->conexionBD();
+use es\klaer\Respuesta;
+use es\klaer\Publicacion;
+use es\klaer\usuarios\Usuario;
 
 $tituloPagina = 'Comentarios';
-$contenidoPrincipal=<<<EOS
-    <h1> NO SE QUE PONER AQUI </h1>
+$contenidoPrincipal = <<<EOS
+  <p><a href="foro.php"> Volver al foro</a></p>
 EOS;
 
 $id = $_GET['id'];
-$result=es\klaer\Publicacion::buscaPub($id);
+$result=Publicacion::buscaPub($id);
 
 if($result){
     $title=$result->getTitulo();
-    $creador=$result->getIdUsuario();
+
+    $idCreador = Usuario::buscaPorId($result->getIdUsuario());
+    $creador = $idCreador->getUsuario();
+    
     $fecha=$result->getFecha();
     $comentario=$result->getMensaje();
 
     $contenidoPrincipal.=<<<EOS
-    <h2> $title </h2> <br>
+    <h1> $title </h1> <br>
         <table id="table">
         <tr>
             <td><p>Creado por $creador - $fecha </p></td>
@@ -31,24 +34,29 @@ if($result){
         
     EOS;
 
-    $respuestas=es\klaer\Respuesta::cargarRespuesta($id);
+    $respuestas=Respuesta::cargarRespuesta($id);
     while($row= $respuestas->fetch_assoc()){
         $idRespuesta = $row['id'];
+
         $usuario = $row['idUsuario'];
+        $idUsuario = Usuario::buscaPorId($usuario);
+        $nombreUsuario = $idUsuario->getUsuario();
+
         $texto = $row['texto'];
         $fechaR = $row['fecha'];
         $contenidoPrincipal.=<<<EOS
         <tr>
           <td>
-          <p>Re: $usuario - $fechaR</p>
+          <p>Re: $nombreUsuario - $fechaR</p>
           </td>
         </tr>
       EOS;
 
-      /*if($usuario ==$_SESSION['nombreUsuario']|| (isset($_SESSION['esAdmin'])&&$_SESSION['esAdmin'])){
-        $contenido.=<<<EOS
+      // DERECHOS DE MODERADOR
+      if($app->tieneRol(Usuario::MOD_ROLE)){
+        $contenidoPrincipal.=<<<EOS
           <tr>
-            <td class="msg">$texto</td>
+            <td>$texto</td>
           
             <td class="button">
             <form class="botones" action = "editar.php?idR=$idRespuesta" method="post">
@@ -62,21 +70,12 @@ if($result){
         EOS; 
       }
       else{
-        $contenido.=<<<EOS
+        $contenidoPrincipal.=<<<EOS
           <tr>
-            <td class="msg"><p>$texto</p></td>
+            <td><p>$texto</p></td>
           </tr>
         EOS; 
-      }*/
-
-      $contenidoPrincipal.=<<<EOS
-      <tr>
-        <td>
-        <p>$texto</p>
-        </td>
-      </tr>
-    EOS;
-
+      }
     }
 
     $respuestas->free();

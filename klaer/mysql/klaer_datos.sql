@@ -25,8 +25,18 @@ SET time_zone = "+00:00";
 -- Volcado de datos para la tabla `foro`
 --
 
-INSERT IGNORE INTO `foro` ( `titulo`, `idUsuario`, `mensaje`, `respuestas`, `fecha`) VALUES
-('FUNDA PARA AURICULARES ESSENTIALS TINY', 2, 'ELEGANTE Y FUNCIONAL\r\nNo te olvides de los auriculares ni de la tarjeta del gimnasio. Es más fácil seguir tu rutina de entrenamiento cuando tienes todo lo que necesitas. Esta pequeña funda adidas cuenta con una correa extraíble que te permite llevarla en el cuello o guardarla en el bolso. Se ha fabricado en piel sintética y luce un logotipo que añade un toque deportivo a tus looks.', 0, '2023-04-11 13:48:01');
+INSERT IGNORE INTO `foro` (`id`, `titulo`, `idUsuario`, `mensaje`, `respuestas`, `fecha`) VALUES
+(1, 'FUNDA PARA AURICULARES ESSENTIALS TINY', 2, 'ELEGANTE Y FUNCIONAL\r\nNo te olvides de los auriculares ni de la tarjeta del gimnasio. Es más fácil seguir tu rutina de entrenamiento cuando tienes todo lo que necesitas. Esta pequeña funda adidas cuenta con una correa extraíble que te permite llevarla en el cuello o guardarla en el bolso. Se ha fabricado en piel sintética y luce un logotipo que añade un toque deportivo a tus looks.', 3, '2023-04-11 13:48:01'),
+(15, 'Nike Jordan', 3, 'nuevas zapatillas de la tienda a tus pies', 1, '2023-04-12 10:26:43');
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT IGNORE INTO `respuestas` (`id`, `idUsuario`, `texto`, `fecha`, `idPub`) VALUES
+(1, 1, 'Me encanta, es super útil!', '2023-04-11 16:21:41', 1),
+(2, 3, 'Yo ya me lo compre!', '2023-04-12 07:30:52', 1),
+(7, 2, 'Me gustan mucho', '2023-04-13 07:14:54', 15);
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -36,13 +46,6 @@ INSERT IGNORE INTO `productos` (`id`, `precio`, `nombre`, `descripcion`, `tipo`,
 (1, '15', 'Camiseta', 'Camiseta blanca simple', 'Ropa', '2023-03-08', 5, 0),
 (2, '160', 'Nike Air Max 27', 'Zapatillas de Nike de la talla 43', 'Zapateria', '2023-03-12', 10, 0),
 (3, '210', 'HP ProBook 430', 'Portatil de HP', 'Informatica', '2023-03-15', 1, 0);
-
---
--- Volcado de datos para la tabla `respuestas`
---
-
-INSERT IGNORE INTO `respuestas` (`idUsuario`, `texto`, `fecha`, `idPub`) VALUES
-(1, 'Me encanta!', '2023-04-11 16:21:41', 0);
 
 --
 -- Volcado de datos para la tabla `roles`

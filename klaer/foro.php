@@ -1,12 +1,10 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/Publicacion.php';
-//require_once __DIR__.'/../../src/usuarios/Usuario.php';
+use es\klaer\Publicacion;
+use es\klaer\usuarios\Usuario;
 
 $tituloPagina = 'Foro';
-//$conn = $app->conexionBD();
 
-//No me gusta tener aqui las css
 $contenidoPrincipal=<<<EOS
 	<h1>Contenido del foro</h1>
 EOS;
@@ -30,13 +28,12 @@ else if($result -> num_rows > 0){
     while($row= $result->fetch_assoc()) { 
 		$id = $row['id'];
 		$title= $row['titulo'];
-		//$idUsuario = $row['idUsuario'];
-		$creador = $row['idUsuario'];
+		$idUsuario = $row['idUsuario'];
 		$respuestas = $row['respuestas'];
 		$fecha= $row['fecha'];
 
-		//$nombreUsuario = Usuario::buscaPorId($idUsuario);
-		//$creador = $nombreUsuario->getUsuario();
+		$nombreUsuario = Usuario::buscaPorId($idUsuario);
+		$creador = $nombreUsuario->getUsuario();
 
 		$contenidoPrincipal.=<<<EOS
 			<tr>
@@ -65,15 +62,15 @@ else if($result -> num_rows > 0){
 }
 else {
     $contenidoPrincipal.=<<<EOS
-      <p>Todavia no hay temas</p>
+      <p>Todavia no hay publicaciones</p>
     EOS;
   }
 
 $contenidoPrincipal.=<<<EOS
-    <form method="post" action="crearPublicacion.php">
-    <p> Titulo: <input type="text" name="titulo_tema" /> </p>
+    <form action="crearPublicacion.php" method="POST">
+    <p> Titulo: <input type="text" name="titulo_pub" /> </p>
     <p> Comentario: <input type="text" name="comentario" /> </p>
-    <p><input type="submit" name="nuevoTema" value="Publicar"/> </p>
+    <p><input type="submit" name="crearPublicacion" value="Publicar"/> </p>
     </form>
 EOS;
 
@@ -83,5 +80,3 @@ EOS;
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/lobby.php', $params);
-
-//require __DIR__.'/includes/vistas/plantillas/lobby.php';
